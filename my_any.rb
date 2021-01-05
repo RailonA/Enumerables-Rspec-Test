@@ -1,5 +1,5 @@
 module Enumerable
-  def my_select
+  def my_any
     raise 'NO BLOCK GIVEN!' unless block_given?
 
     arr = to_a
