@@ -11,5 +11,7 @@ module Enumerable
       arr.delete_at(index) unless yield arr[index]
       index += 1
     end
+
+    arr
   end
 end
