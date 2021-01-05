@@ -6,8 +6,10 @@ module Enumerable
             yield arr[i]
             i +=1
         end
+
+        return arr
     end
 end
 
-numbers = [1,3,5]
-puts numbers.my_each {|x| puts x*x}
+#numbers = [1,3,5]
+#puts numbers.my_each {|x| puts x*x}
