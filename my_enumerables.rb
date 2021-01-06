@@ -87,14 +87,12 @@ module Enumerable
     count
   end
 
-
-
-  def my_inject
+  def my_inject(arg = nil)
     raise 'ERROR' unless block_given?
 
     arr = to_a
     i = 1
-    result = arr[0]
+    result = arg.nil? ? arr[0] : arg
     result = '' if result.class == String
 
     while i < arr.length
@@ -104,8 +102,6 @@ module Enumerable
 
     result
   end
-
-  
 
   def my_map(pro = nil)
     raise 'NO BLOCK GIVEN!' unless block_given?
