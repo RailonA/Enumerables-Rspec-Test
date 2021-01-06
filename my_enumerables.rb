@@ -1,4 +1,38 @@
 module Enumerable
+
+  def my_each
+    arr = to_a
+    i = 0
+    while i < arr.length
+      yield arr[i]
+      i += 1
+    end
+
+    arr
+  end
+
+  def my_each_with_index
+    arr = to_a
+    i = 0
+    while i < arr.length
+      yield arr[i], i
+      i += 1
+    end
+
+    arr
+  end
+
+  def my_select
+    raise 'NO BLOCK GIVEN!' unless block_given?
+
+    arr = to_a
+    arr2 = []
+    arr.my_each_with_index do |_item, index|
+      arr2.push(arr[index]) if yield arr[index]
+    end
+    arr2
+  end
+
   def my_all
     raise 'NO BLOCK GIVEN!' unless block_given?
 
@@ -25,6 +59,18 @@ module Enumerable
     any
   end
 
+
+  def my_none
+    raise 'NO BLOCK GIVEN!' unless block_given?
+
+    arr = to_a
+    arr.my_each_with_index do |_item, index|
+      return false if yield arr[index]
+    end
+    true
+  end
+
+
   def my_count(arg = nil)
     arr = to_a
 
@@ -41,34 +87,12 @@ module Enumerable
     count
   end
 
-  def my_each
-    arr = to_a
-    i = 0
-    while i < arr.length
-      yield arr[i]
-      i += 1
-    end
-
-    arr
-  end
-
-  def my_each_with_index
-    arr = to_a
-    i = 0
-    while i < arr.length
-      yield arr[i], i
-      i += 1
-    end
-
-    arr
-  end
-
-  def my_inject
+  def my_inject(arg = nil)
     raise 'ERROR' unless block_given?
 
     arr = to_a
     i = 1
-    result = arr[0]
+    result = arg.nil? ? arr[0] : arg
     result = '' if result.class == String
 
     while i < arr.length
@@ -83,34 +107,15 @@ module Enumerable
     raise 'NO BLOCK GIVEN!' unless block_given?
 
     arr = to_a
+    arr2 = []
     if pro
       arr.my_each_with_index do |_item, index|
-        arr[index] = proc.cal arr[index]
+        arr2.push(proc.cal arr[index])
       end
     else
       arr.my_each_with_index do |_item, index|
-        arr[index] = yield arr[index]
+        arr2.push(yield arr[index])
       end
-    end
-  end
-
-  def my_none
-    raise 'NO BLOCK GIVEN!' unless block_given?
-
-    arr = to_a
-    arr.my_each_with_index do |_item, index|
-      return false if yield arr[index]
-    end
-    true
-  end
-
-  def my_select
-    raise 'NO BLOCK GIVEN!' unless block_given?
-
-    arr = to_a
-    arr2 = []
-    arr.my_each_with_index do |_item, index|
-      arr2.push(arr[index]) if yield arr[index]
     end
     arr2
   end
