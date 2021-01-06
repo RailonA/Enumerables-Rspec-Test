@@ -105,6 +105,8 @@ module Enumerable
     result
   end
 
+  
+
   def my_map(pro = nil)
     raise 'NO BLOCK GIVEN!' unless block_given?
 

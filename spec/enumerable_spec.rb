@@ -70,6 +70,15 @@ describe Enumerable do
     end
 
 
+    # my_count_with_arg
+    describe '#my_count' do
+        arr = [1,2,2,2,3]
+        it 'my_count should be equal to count' do
+            expect(arr.my_count(2)).to eq(arr.count(2))
+        end
+    end
+
+
     # my_inject
     describe '#my_inject' do
       it 'my_inject should return the same Total' do
@@ -78,10 +87,18 @@ describe Enumerable do
     end
 
 
-    # my_map
+    # my_map_with_block
     describe '#my_map' do
       it 'my_map should return the same as map' do
           expect(array.my_map{|element| element * 5 }).to eq(array.map{|element| element * 5 })
+      end
+    end
+
+    # my_map_with_Proc
+    describe '#my_map' do
+      procc = Proc.new{|element| element * 10}
+      it 'my_map should return the same as map' do
+          expect(array.my_map(&procc)).to eq(array.map(&procc))
       end
     end
     
