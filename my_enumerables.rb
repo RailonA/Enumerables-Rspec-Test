@@ -2,14 +2,22 @@ module Enumerable
 
 #comment
 
-  def my_each
+  def my_each(pro = nil)
+    return to_enum unless block_given?
     arr = to_a
     i = 0
-    while i < arr.length
-      yield arr[i]
-      i += 1
-    end
 
+    if pro
+      while i < arr.length
+        proc.cal arr[i]
+        i += 1
+      end
+    else
+      while i < arr.length
+        yield arr[i]
+        i += 1
+      end
+    end  
     arr
   end
 
