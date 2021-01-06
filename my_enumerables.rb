@@ -106,36 +106,18 @@ module Enumerable
 
   def my_select
     raise 'NO BLOCK GIVEN!' unless block_given?
-
     arr = to_a
     index = 0
-
-    arr.my_each do |_item|
-      arr.delete_at(index) unless yield arr[index]
-      index += 1
+    arr2 = []
+    arr.my_each_with_index do |_item, index|
+      if yield arr[index]
+        arr2.push(arr[index])
+      end
     end
-
-    arr
+    arr2
   end
 end
 
-def multiply_els
-  test_number = 0
-  until test_number == 1000
-
-    array_length = Random.rand(20)
-    arr = []
-    until array_length.zero?
-      arr += [Random.rand(101)]
-      array_length -= 1
-    end
-
-    unless arr.my_inject { |total, n| total * n } == arr.inject { |total, n| total * n }
-      raise 'MY_INJECT FAILED'
-    end
-
-    test_number += 1
-  end
-
-  p 'MY_INJECT SUCCESFUL'
+def multiply_els(arr = [])
+  return arr.my_inject {|total, item| total * item}
 end
