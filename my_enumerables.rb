@@ -119,9 +119,6 @@ module Enumerable
 
   def my_count(arg = nil)
     arr = to_a
-
-    # return arr.length if arg.nil?
-
     index = 0
     count = 0
 
@@ -146,25 +143,8 @@ module Enumerable
     count
   end
 
-  
-  def my_inject(arg = nil)
-    raise 'ERROR' unless block_given?
-
-    arr = to_a
-    i = 1
-    result = arg.nil? ? arr[0] : arg
-    result = '' if result.class == String
-
-    while i < arr.length
-      result = yield result, arr[i]
-      i += 1
-    end
-
-    result
-  end
-
   def my_map(pro = nil)
-    raise 'NO BLOCK GIVEN!' unless block_given?
+    return self.to_enum unless block_given?
 
     arr = to_a
     arr2 = []
@@ -179,8 +159,26 @@ module Enumerable
     end
     arr2
   end
-end
 
-def multiply_els(arr = [])
-  arr.my_inject { |total, item| total * item }
-end
+  def my_inject(arg = nil)
+    return self.to_enum unless block_given?
+
+    arr = to_a
+    i = 1
+    result = arg.nil? ? arr[0] : arg
+    result = '' if result.class == String
+
+    while i < arr.length
+      result = yield result, arr[i]
+      i += 1
+    end
+
+    result
+  end
+
+
+  def multiply_els(arr = [])
+    arr.my_inject { |total, item| total * item }
+  end
+  
+end  
