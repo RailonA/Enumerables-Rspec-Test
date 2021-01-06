@@ -1,6 +1,6 @@
 module Enumerable
       def my_map(pr=nil)
-          # raise 'NO BLOCK GIVEN!' unless block_given?
+          raise 'NO BLOCK GIVEN!' unless block_given?
           arr = to_a
           if pr
             arr.my_each_with_index do |_item, index|
