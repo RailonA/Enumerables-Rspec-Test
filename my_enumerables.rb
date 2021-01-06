@@ -1,5 +1,7 @@
 module Enumerable
 
+#comment
+
   def my_each
     arr = to_a
     i = 0
