@@ -106,18 +106,16 @@ module Enumerable
 
   def my_select
     raise 'NO BLOCK GIVEN!' unless block_given?
+
     arr = to_a
-    index = 0
     arr2 = []
     arr.my_each_with_index do |_item, index|
-      if yield arr[index]
-        arr2.push(arr[index])
-      end
+      arr2.push(arr[index]) if yield arr[index]
     end
     arr2
   end
 end
 
 def multiply_els(arr = [])
-  return arr.my_inject {|total, item| total * item}
+  arr.my_inject { |total, item| total * item }
 end
