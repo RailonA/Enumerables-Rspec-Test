@@ -120,19 +120,33 @@ module Enumerable
   def my_count(arg = nil)
     arr = to_a
 
-    return arr.length if arg.nil?
+    # return arr.length if arg.nil?
 
     index = 0
     count = 0
 
-    arr.my_each do |_item|
-      count += 1 if arg == arr[index]
-      index += 1
+    if arg 
+      while index < arr.length
+        puts "ha"
+        count += 1 if proc.call arr[index]
+        index += 1
+      end
+    elsif block_given?
+      while index < arr.length
+        count += 1 if yield arr[index]
+        index += 1
+      end
+    else
+      arr.my_each do |_item|
+        
+        count += 1 if arg == arr[index]
+        index += 1
+      end
     end
-
     count
   end
 
+  
   def my_inject(arg = nil)
     raise 'ERROR' unless block_given?
 
