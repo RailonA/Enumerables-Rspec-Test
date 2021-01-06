@@ -42,7 +42,7 @@ module Enumerable
   end
 
   def my_select
-    raise 'NO BLOCK GIVEN!' unless block_given?
+    return self.to_enum unless block_given?
 
     arr = to_a
     arr2 = []
@@ -52,42 +52,69 @@ module Enumerable
     arr2
   end
 
-  def my_all?
-    raise 'NO BLOCK GIVEN!' unless block_given?
-
+  def my_all?(args= nil)
+    return self.to_enum unless block_given? || args != nil
     arr = to_a
-    arr.my_each_with_index do |_item, index|
-      return false unless yield arr[index]
-    end
+    if block_given?
+      arr.my_each_with_index do |_item, index|
+        return false unless yield arr[index]
+      end
+    elsif args.is_a? Class
+      arr.my_each_with_index do |_item, index|
+        return false unless _item.class.ancestors.include?(args)
+      end
+    elsif args.is_a? Regexp
+      arr.my_each_with_index do |_item, index|
+        return false unless _item.match(args)
+      end
+    end  
     true
   end
 
-  def my_any?
-    raise 'NO BLOCK GIVEN!' unless block_given?
 
+  
+  def my_any?(args= nil)
+    return self.to_enum unless block_given? || args != nil
     arr = to_a
-    index = 0
     any = false
 
-    arr.my_each do |_item|
-      any = true if yield arr[index]
-
-      index += 1
-    end
-
+    if block_given?
+      arr.my_each_with_index do |_item, index|
+        any = true if yield arr[index]
+      end
+    elsif args.is_a? Class
+      arr.my_each_with_index do |_item, index|
+        puts _item.class.ancestors
+        any = true if _item.class.ancestors.include?(args)
+      end
+    elsif args.is_a? Regexp
+      arr.my_each_with_index do |_item, index|
+        any = true if _item.match(args)
+      end
+    end  
     any
   end
+  
 
-
-  def my_none?
-    raise 'NO BLOCK GIVEN!' unless block_given?
-
+  def my_none?(args= nil)
+    return self.to_enum unless block_given? || args != nil
     arr = to_a
-    arr.my_each_with_index do |_item, index|
-      return false if yield arr[index]
-    end
-    true
+    if block_given?
+      arr.my_each_with_index do |_item, index|
+        return true unless yield arr[index]
+      end
+    elsif args.is_a? Class
+      arr.my_each_with_index do |_item, index|
+        return true unless _item.class.ancestors.include?(args)
+      end
+    elsif args.is_a? Regexp
+      arr.my_each_with_index do |_item, index|
+        return true unless _item.match(args)
+      end
+    end  
+    false
   end
+
 
 
   def my_count(arg = nil)
