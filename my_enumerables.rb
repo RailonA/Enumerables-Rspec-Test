@@ -1,12 +1,12 @@
 module Enumerable
-
   def my_all
-      raise 'NO BLOCK GIVEN!' unless block_given?
-      arr = to_a
-      arr.my_each_with_index do |_item, index|
+    raise 'NO BLOCK GIVEN!' unless block_given?
+
+    arr = to_a
+    arr.my_each_with_index do |_item, index|
       return false unless yield arr[index]
-      end
-      true
+    end
+    true
   end
 
   def my_any
@@ -43,24 +43,24 @@ module Enumerable
 
   def my_each
     arr = to_a
-    i =0
+    i = 0
     while i < arr.length
-        yield arr[i]
-        i +=1
+      yield arr[i]
+      i += 1
     end
 
-    return arr
+    arr
   end
 
   def my_each_with_index
     arr = to_a
-    i =0
+    i = 0
     while i < arr.length
-        yield arr[i], i
-        i +=1
+      yield arr[i], i
+      i += 1
     end
 
-    return arr
+    arr
   end
 
   def my_inject
@@ -79,25 +79,27 @@ module Enumerable
     result
   end
 
-  def my_map(pr=nil)
+  def my_map(pro = nil)
     raise 'NO BLOCK GIVEN!' unless block_given?
+
     arr = to_a
-    if pr
+    if pro
       arr.my_each_with_index do |_item, index|
-          arr[index] = proc.cal arr[index]
+        arr[index] = proc.cal arr[index]
       end
     else
       arr.my_each_with_index do |_item, index|
-          arr[index] = yield arr[index]
+        arr[index] = yield arr[index]
       end
     end
   end
 
   def my_none
     raise 'NO BLOCK GIVEN!' unless block_given?
+
     arr = to_a
     arr.my_each_with_index do |_item, index|
-    return false if yield arr[index]
+      return false if yield arr[index]
     end
     true
   end
@@ -115,8 +117,6 @@ module Enumerable
 
     arr
   end
-
-  #END
 end
 
 def multiply_els
@@ -131,8 +131,6 @@ def multiply_els
     end
 
     unless arr.my_inject { |total, n| total * n } == arr.inject { |total, n| total * n }
-      p arr.my_inject { |total, n| total * n }
-      p arr.inject { |total, n| total * n }
       raise 'MY_INJECT FAILED'
     end
 
