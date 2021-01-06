@@ -29,35 +29,60 @@ describe Enumerable do
         end
     end
 
-    # my_select
-    describe '#my_select' do
-        it 'my_select should return odd array' do
-            expect(array.my_select{|x| x%2 == 0}).to eq(array.select{|x| x%2 == 0})
-        end
-    end
 
-    # my_select
-    describe '#my_select' do
-        it 'my_select should return odd array' do
-            expect(array.my_select{|x| x%2 == 0}).to eq(array.select{|x| x%2 == 0})
-        end
-    end
-
-    # my_select
-    describe '#my_select' do
-        it 'my_select should return odd array' do
-            expect(array.my_select{|x| x%2 == 0}).to eq(array.select{|x| x%2 == 0})
-        end
+    # my_all
+    describe '#my_all' do
+      it 'my_all should return false' do
+          expect(array.my_all{|x| x.even? }).to eq(array.all?{|x| x.even? })
+      end
     end
 
 
-    # my_select
-    describe '#my_select' do
-        it 'my_select should return odd array' do
-            expect(array.my_select{|x| x%2 == 0}).to eq(array.select{|x| x%2 == 0})
-        end
+    # my_any
+    describe '#my_any' do
+      it 'my_any should return true' do
+          expect(array.my_any{|x| x.even? }).to eq(array.any?{|x| x.even? })
+      end
     end
 
 
+    # my_none
+    describe '#my_none' do
+      it 'my_none should return false' do
+          expect(array.my_none{|x| x.even? }).to eq(array.none?{|x| x.even? })
+      end
+    end
+
+
+    # my_none
+    describe '#my_none' do
+      it 'my_none should return false' do
+          expect(array.my_none{|x| x.even? }).to eq(array.none?{|x| x.even? })
+      end
+    end
+
+
+    # my_count
+    describe '#my_count' do
+      it 'my_count should be equal to count' do
+          expect(array.my_count).to eq(array.count)
+      end
+    end
+
+
+    # my_inject
+    describe '#my_inject' do
+      it 'my_inject should return the same Total' do
+          expect(array.my_inject{|total, element| total + element}).to eq(array.inject{|total, element| total + element})
+      end
+    end
+
+
+    # my_map
+    describe '#my_map' do
+      it 'my_map should return the same as map' do
+          expect(array.my_map{|element| element * 5 }).to eq(array.map{|element| element * 5 })
+      end
+    end
     
 end
