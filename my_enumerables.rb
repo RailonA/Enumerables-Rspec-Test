@@ -33,7 +33,7 @@ module Enumerable
     arr2
   end
 
-  def my_all
+  def my_all?
     raise 'NO BLOCK GIVEN!' unless block_given?
 
     arr = to_a
@@ -43,7 +43,7 @@ module Enumerable
     true
   end
 
-  def my_any
+  def my_any?
     raise 'NO BLOCK GIVEN!' unless block_given?
 
     arr = to_a
@@ -60,7 +60,7 @@ module Enumerable
   end
 
 
-  def my_none
+  def my_none?
     raise 'NO BLOCK GIVEN!' unless block_given?
 
     arr = to_a
