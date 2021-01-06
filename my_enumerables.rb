@@ -119,23 +119,6 @@ module Enumerable
   end
 end
 
-def multiply_els
-  test_number = 0
-  until test_number == 1000
-
-    array_length = Random.rand(20)
-    arr = []
-    until array_length.zero?
-      arr += [Random.rand(101)]
-      array_length -= 1
-    end
-
-    unless arr.my_inject { |total, n| total * n } == arr.inject { |total, n| total * n }
-      raise 'MY_INJECT FAILED'
-    end
-
-    test_number += 1
-  end
-
-  p 'MY_INJECT SUCCESFUL'
+def multiply_els(arr = [])
+  return arr.my_inject {|total, item| total * item}
 end
