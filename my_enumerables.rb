@@ -130,7 +130,7 @@ module Enumerable
     index = 0
     count = 0
 
-    if arg
+    if arg.is_a? Proc
       while index < length
         count += 1 if proc.call self[index]
         index += 1
@@ -138,6 +138,11 @@ module Enumerable
     elsif block_given?
       while index < length
         count += 1 if yield self[index]
+        index += 1
+      end
+    elsif arg
+      while index < length
+        count += 1 if arg == self[index]
         index += 1
       end
     else
