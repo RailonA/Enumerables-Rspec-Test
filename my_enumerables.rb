@@ -56,21 +56,18 @@ module Enumerable
 
   def my_all?(args = nil)
     arr = to_a
-    if block_given?
-      arr.my_each_with_index do |_item, index|
+
+    arr.my_each_with_index do |item, index|
+      if block_given?
         return false unless yield arr[index]
-      end
-    elsif args.is_a? Class
-      arr.my_each_with_index do |item, _index|
+      elsif args.is_a? Class
         return false unless item.class.ancestors.include?(args)
-      end
-    elsif args.is_a? Regexp
-      arr.my_each_with_index do |item, _index|
+      elsif args.is_a? Regexp
         return false unless item.to_s.match(args)
-      end
-    else
-      arr.my_each_with_index do |item, _index|
-        return false if item == false || item.nil?
+      elsif args
+        return false if item != args
+      elsif item == false || item.nil?
+        return false
       end
     end
 
