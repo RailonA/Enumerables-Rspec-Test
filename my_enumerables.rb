@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
@@ -118,24 +120,22 @@ module Enumerable
   end
 
   def my_count(arg = nil)
-    arr = to_a
     index = 0
     count = 0
 
     if arg
-      while index < arr.length
-        puts 'ha'
-        count += 1 if proc.call arr[index]
+      while index < length
+        count += 1 if proc.call self[index]
         index += 1
       end
     elsif block_given?
-      while index < arr.length
-        count += 1 if yield arr[index]
+      while index < length
+        count += 1 if yield self[index]
         index += 1
       end
     else
-      arr.my_each do |_item|
-        count += 1 if arg == arr[index]
+      self.my_each do |_item|
+        count += 1
         index += 1
       end
     end
