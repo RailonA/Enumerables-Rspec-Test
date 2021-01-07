@@ -100,49 +100,50 @@ module Enumerable
   def my_none?(args = nil)
     arr = to_a
     any = true
-      arr.my_each_with_index do |item, index|
-        if block_given?
-          any = false if yield arr[index]
-        elsif args.is_a? Class
-          any = false if item.class.ancestors.include?(args)
-        elsif args.is_a? Regexp
-          any = false if item.match(args)
-        elsif args
-          any = false if args == item
-        else
-          any = false unless item == false || item.nil?
-        end
+    arr.my_each_with_index do |item, index|
+      if block_given?
+        any = false if yield arr[index]
+      elsif args.is_a? Class
+        any = false if item.class.ancestors.include?(args)
+      elsif args.is_a? Regexp
+        any = false if item.match(args)
+      elsif args
+        any = false if args == item
+      else
+        any = false unless item == false || item.nil?
       end
+    end
     any
   end
 
   def my_count(arg = nil)
     count = index = 0
     return length if arg.nil? && !block_given?
-    self.to_a
-      while index < self.to_a.length
-        if (arg.is_a?(Proc) && proc.call(self.to_a[index])) ||
-          (arg == self.to_a[index])
-          count += 1
-        elsif block_given?
-          count += 1 if yield self.to_a[index]
-        end
-        index += 1
+
+    to_a
+    while index < to_a.length
+      if (arg.is_a?(Proc) && proc.call(to_a[index])) ||
+         (arg == to_a[index])
+        count += 1
+      elsif block_given?
+        count += 1 if yield to_a[index]
       end
+      index += 1
+    end
     count
   end
 
   def my_map(pro = nil)
     arr = to_a
     arr2 = []
-    arr.my_each_with_index do |item, index|
+    arr.my_each_with_index do |_item, index|
       if block_given?
         arr2.push(pro.call(arr[index])) if pro
         arr2.push(yield(arr[index])) unless pro
       elsif pro
         arr2.push(pro.call(arr[index]))
       else
-          arr2.push(yield arr[index])
+        arr2.push(yield arr[index])
       end
     end
     arr2
