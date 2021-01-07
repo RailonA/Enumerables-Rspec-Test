@@ -101,24 +101,19 @@ module Enumerable
   def my_none?(args = nil)
     arr = to_a
     any = true
-
-    if block_given?
-      arr.my_each_with_index do |_item, index|
-        any = false if yield arr[index]
+      arr.my_each_with_index do |item, index|
+        if block_given?
+          any = false if yield arr[index]
+        elsif args.is_a? Class
+          any = false if item.class.ancestors.include?(args)
+        elsif args.is_a? Regexp
+          any = false if item.match(args)
+        elsif args
+          any = false if args == item
+        else
+          any = false unless item == false || item.nil?
+        end
       end
-    elsif args.is_a? Class
-      arr.my_each_with_index do |item, _index|
-        any = false if item.class.ancestors.include?(args)
-      end
-    elsif args.is_a? Regexp
-      arr.my_each_with_index do |item, _index|
-        any = false if item.match(args)
-      end
-    else
-      arr.my_each_with_index do |item, _index|
-        any = false unless item == false || item.nil?
-      end
-    end
     any
   end
 
