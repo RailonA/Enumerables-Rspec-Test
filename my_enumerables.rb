@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
@@ -134,7 +132,7 @@ module Enumerable
         index += 1
       end
     else
-      self.my_each do |_item|
+      my_each do |_item|
         count += 1
         index += 1
       end
