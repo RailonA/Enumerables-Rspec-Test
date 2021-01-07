@@ -157,19 +157,26 @@ module Enumerable
     arr2
   end
 
-  def my_inject(arg = nil)
-    return to_enum unless block_given?
-
+  def my_inject(arg = self[0], sym = nil)
     arr = to_a
     i = 1
-    result = arg.nil? ? arr[0] : arg
-    result = '' if result.class == String
-
+    result = arg
+    if arg.is_a? Symbol
+      sym = arg
+      result = arr[0]
+    end
+    if sym
+      i = 0
+      while i < arr.length
+        result = result.send sym, arr[i]
+        i += 1
+      end
+      result
+    end
     while i < arr.length
       result = yield result, arr[i]
       i += 1
     end
-
     result
   end
 
