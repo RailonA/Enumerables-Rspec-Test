@@ -1,5 +1,5 @@
 module Enumerable
-  
+
   def my_each(pro = nil)
     return to_enum unless block_given?
 
@@ -119,7 +119,7 @@ module Enumerable
     arr = to_a
     index = 0
     count = 0
-
+    
     if arg
       while index < arr.length
         puts 'ha'
