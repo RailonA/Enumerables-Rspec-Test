@@ -149,12 +149,11 @@ module Enumerable
   end
 
   def my_inject(arg = nil, sym = nil)
-
     arr = to_a
 
     raise LocalJumpError if arg.nil? and !block_given?
 
-    i = 0
+    i = block_given? ? 1 : 0
     result = arg
     result = arr[0] if !arg && block_given?
 
@@ -168,6 +167,7 @@ module Enumerable
       if sym
         result = result.send sym, arr[i]
       elsif block_given?
+        p 'this one'
         result = yield result, arr[i]
       end
 
