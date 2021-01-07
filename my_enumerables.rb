@@ -40,7 +40,7 @@ module Enumerable
       end
     end
 
-    arr
+    self
   end
 
   def my_select
