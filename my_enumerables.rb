@@ -1,5 +1,9 @@
-module Enumerable
+# frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+module Enumerable
   def my_each(pro = nil)
     return to_enum unless block_given?
 
@@ -119,7 +123,7 @@ module Enumerable
     arr = to_a
     index = 0
     count = 0
-    
+
     if arg
       while index < arr.length
         puts 'ha'
@@ -184,3 +188,7 @@ module Enumerable
     arr.my_inject { |total, item| total * item }
   end
 end
+
+# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
