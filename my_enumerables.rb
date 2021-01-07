@@ -19,7 +19,7 @@ module Enumerable
         i += 1
       end
     end
-    arr
+    self
   end
 
   def my_each_with_index(pro = nil)
@@ -40,7 +40,7 @@ module Enumerable
       end
     end
 
-    arr
+    self
   end
 
   def my_select
@@ -55,8 +55,6 @@ module Enumerable
   end
 
   def my_all?(args = nil)
-    return to_enum unless block_given? || !args.nil?
-
     arr = to_a
     if block_given?
       arr.my_each_with_index do |_item, index|
@@ -68,75 +66,82 @@ module Enumerable
       end
     elsif args.is_a? Regexp
       arr.my_each_with_index do |item, _index|
-        return false unless item.match(args)
+        return false unless item.to_s.match(args)
+      end
+    else
+      arr.my_each_with_index do |item, _index|
+        return false if item == false || item.nil?
       end
     end
+
     true
   end
 
   def my_any?(args = nil)
-    return to_enum unless block_given? || !args.nil?
-
-    arr = to_a
     any = false
 
     if block_given?
-      arr.my_each_with_index do |_item, index|
+      my_each_with_index do |_item, index|
         any = true if yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |item, _index|
+      my_each_with_index do |item, _index|
         puts item.class.ancestors
         any = true if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |item, _index|
+      my_each_with_index do |item, _index|
         any = true if item.match(args)
+      end
+    else
+      my_each_with_index do |item, _index|
+        any = true unless item == false || item.nil?
       end
     end
     any
   end
 
   def my_none?(args = nil)
-    return to_enum unless block_given? || !args.nil?
-
     arr = to_a
+    any = true
+
     if block_given?
       arr.my_each_with_index do |_item, index|
-        return true unless yield arr[index]
+        any = false if yield arr[index]
       end
     elsif args.is_a? Class
       arr.my_each_with_index do |item, _index|
-        return true unless item.class.ancestors.include?(args)
+        any = false if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
       arr.my_each_with_index do |item, _index|
-        return true unless item.match(args)
+        any = false if item.match(args)
+      end
+    else
+      arr.my_each_with_index do |item, _index|
+        any = false unless item == false || item.nil?
       end
     end
-    false
+    any
   end
 
   def my_count(arg = nil)
     index = 0
     count = 0
 
-    if arg
-      while index < length
-        count += 1 if proc.call self[index]
-        index += 1
-      end
-    elsif block_given?
-      while index < length
-        count += 1 if yield self[index]
-        index += 1
-      end
-    else
-      my_each do |_item|
+    return length if arg.nil? && !block_given?
+
+    while index < length
+      if (arg.is_a?(Proc) && proc.call(self[index])) ||
+         (arg == self[index])
         count += 1
-        index += 1
+      elsif block_given?
+        count += 1 if yield self[index]
       end
+
+      index += 1
     end
+
     count
   end
 
@@ -158,31 +163,33 @@ module Enumerable
   end
 
   def my_inject(arg = self[0], sym = nil)
-    arr = to_a
-    i = 1
+    i = 0
     result = arg
+
     if arg.is_a? Symbol
+      i += 1
       sym = arg
-      result = arr[0]
+      result = self[0]
     end
-    if sym
-      i = 0
-      while i < arr.length
-        result = result.send sym, arr[i]
-        i += 1
+
+    while i < length
+      if sym
+        p 'this'
+        result = result.send sym, self[i]
+      elsif arg && block_given?
+        p 'that'
+        result = yield result, self[i]
       end
-      result
-    end
-    while i < arr.length
-      result = yield result, arr[i]
+
       i += 1
     end
+
     result
   end
+end
 
-  def multiply_els(arr = [])
-    arr.my_inject { |total, item| total * item }
-  end
+def multiply_els(arr = [])
+  arr.my_inject { |total, item| total * item }
 end
 
 # rubocop:enable Metrics/ModuleLength
