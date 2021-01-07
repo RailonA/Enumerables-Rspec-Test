@@ -103,23 +103,27 @@ module Enumerable
   end
 
   def my_none?(args = nil)
-    return to_enum unless block_given? || !args.nil?
-
     arr = to_a
+    any = true
+
     if block_given?
       arr.my_each_with_index do |_item, index|
-        return true unless yield arr[index]
+        any = false if yield arr[index]
       end
     elsif args.is_a? Class
       arr.my_each_with_index do |item, _index|
-        return true unless item.class.ancestors.include?(args)
+        any = false if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
       arr.my_each_with_index do |item, _index|
-        return true unless item.match(args)
+        any = false if item.match(args)
+      end
+    else
+      arr.my_each_with_index do |item, _index|
+        any = false unless item == false || item.nil?
       end
     end
-    false
+    any
   end
 
   def my_count(arg = nil)
