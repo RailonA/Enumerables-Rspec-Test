@@ -79,11 +79,10 @@ module Enumerable
 
     if block_given?
       my_each_with_index do |_item, index|
-        any = true if yield arr[index]
+        any = true if yield self[index]
       end
     elsif args.is_a? Class
       my_each_with_index do |item, _index|
-        puts item.class.ancestors
         any = true if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
@@ -92,7 +91,7 @@ module Enumerable
       end
     else
       my_each_with_index do |item, _index|
-        any = true unless item == false || item.nil?
+        any = true unless item == false || item.nil? || !item.to_s.match(args.to_s)
       end
     end
     any
