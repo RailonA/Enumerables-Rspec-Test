@@ -1,9 +1,9 @@
 module Enumerable
-
-#comment
+  # comment
 
   def my_each(pro = nil)
     return to_enum unless block_given?
+
     arr = to_a
     i = 0
 
@@ -17,32 +17,33 @@ module Enumerable
         yield arr[i]
         i += 1
       end
-    end  
+    end
     arr
   end
 
   def my_each_with_index(pro = nil)
     return to_enum unless block_given?
+
     arr = to_a
     i = 0
 
     if pro
       while i < arr.length
-        proc.cal arr[i],i
+        proc.cal arr[i], i
         i += 1
       end
     else
       while i < arr.length
-        yield arr[i],i
+        yield arr[i], i
         i += 1
       end
-    end  
+    end
 
     arr
   end
 
   def my_select
-    return self.to_enum unless block_given?
+    return to_enum unless block_given?
 
     arr = to_a
     arr2 = []
@@ -52,29 +53,29 @@ module Enumerable
     arr2
   end
 
-  def my_all?(args= nil)
-    return self.to_enum unless block_given? || args != nil
+  def my_all?(args = nil)
+    return to_enum unless block_given? || !args.nil?
+
     arr = to_a
     if block_given?
       arr.my_each_with_index do |_item, index|
         return false unless yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |_item, index|
+      arr.my_each_with_index do |_item, _index|
         return false unless _item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |_item, index|
+      arr.my_each_with_index do |_item, _index|
         return false unless _item.match(args)
       end
-    end  
+    end
     true
   end
 
+  def my_any?(args = nil)
+    return to_enum unless block_given? || !args.nil?
 
-  
-  def my_any?(args= nil)
-    return self.to_enum unless block_given? || args != nil
     arr = to_a
     any = false
 
@@ -83,48 +84,46 @@ module Enumerable
         any = true if yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |_item, index|
+      arr.my_each_with_index do |_item, _index|
         puts _item.class.ancestors
         any = true if _item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |_item, index|
+      arr.my_each_with_index do |_item, _index|
         any = true if _item.match(args)
       end
-    end  
+    end
     any
   end
-  
 
-  def my_none?(args= nil)
-    return self.to_enum unless block_given? || args != nil
+  def my_none?(args = nil)
+    return to_enum unless block_given? || !args.nil?
+
     arr = to_a
     if block_given?
       arr.my_each_with_index do |_item, index|
         return true unless yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |_item, index|
+      arr.my_each_with_index do |_item, _index|
         return true unless _item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |_item, index|
+      arr.my_each_with_index do |_item, _index|
         return true unless _item.match(args)
       end
-    end  
+    end
     false
   end
-
-
 
   def my_count(arg = nil)
     arr = to_a
     index = 0
     count = 0
 
-    if arg 
+    if arg
       while index < arr.length
-        puts "ha"
+        puts 'ha'
         count += 1 if proc.call arr[index]
         index += 1
       end
@@ -135,7 +134,6 @@ module Enumerable
       end
     else
       arr.my_each do |_item|
-        
         count += 1 if arg == arr[index]
         index += 1
       end
@@ -144,13 +142,13 @@ module Enumerable
   end
 
   def my_map(pro = nil)
-    return self.to_enum unless block_given?
+    return to_enum unless block_given?
 
     arr = to_a
     arr2 = []
     if pro
       arr.my_each_with_index do |_item, index|
-        arr2.push(proc.cal arr[index])
+        arr2.push(proc.cal(arr[index]))
       end
     else
       arr.my_each_with_index do |_item, index|
@@ -161,7 +159,7 @@ module Enumerable
   end
 
   def my_inject(arg = nil)
-    return self.to_enum unless block_given?
+    return to_enum unless block_given?
 
     arr = to_a
     i = 1
@@ -176,9 +174,7 @@ module Enumerable
     result
   end
 
-
   def multiply_els(arr = [])
     arr.my_inject { |total, item| total * item }
   end
-  
-end  
+end
