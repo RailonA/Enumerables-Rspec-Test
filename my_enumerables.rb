@@ -148,23 +148,27 @@ module Enumerable
     arr2
   end
 
-  def my_inject(arg = self[0], sym = nil)
+  def my_inject(arg = nil, sym = nil)
+
+    arr = to_a
+
+    raise LocalJumpError if arg.nil? and !block_given?
+
     i = 0
     result = arg
+    result = arr[0] if !arg && block_given?
 
     if arg.is_a? Symbol
       i += 1
       sym = arg
-      result = self[0]
+      result = arr[0]
     end
 
-    while i < length
+    while i < arr.length
       if sym
-        p 'this'
-        result = result.send sym, self[i]
-      elsif arg && block_given?
-        p 'that'
-        result = yield result, self[i]
+        result = result.send sym, arr[i]
+      elsif block_given?
+        result = yield result, arr[i]
       end
 
       i += 1
