@@ -70,7 +70,7 @@ module Enumerable
       end
     else
       arr.my_each_with_index do |item, _index|
-        return false if item == false or item.nil?
+        return false if item == false || item.nil?
       end
     end
 
@@ -78,8 +78,6 @@ module Enumerable
   end
 
   def my_any?(args = nil)
-    return to_enum unless block_given? || !args.nil?
-
     arr = to_a
     any = false
 
@@ -95,6 +93,10 @@ module Enumerable
     elsif args.is_a? Regexp
       arr.my_each_with_index do |item, _index|
         any = true if item.match(args)
+      end
+    else
+      arr.my_each_with_index do |item, _index|
+        any = true unless item == false || item.nil?
       end
     end
     any
