@@ -117,22 +117,18 @@ module Enumerable
   end
 
   def my_count(arg = nil)
-    index = 0
-    count = 0
-
+    count = index = 0
     return length if arg.nil? && !block_given?
-
-    while index < length
-      if (arg.is_a?(Proc) && proc.call(self[index])) ||
-         (arg == self[index])
-        count += 1
-      elsif block_given?
-        count += 1 if yield self[index]
+    self.to_a
+      while index < self.to_a.length
+        if (arg.is_a?(Proc) && proc.call(self.to_a[index])) ||
+          (arg == self.to_a[index])
+          count += 1
+        elsif block_given?
+          count += 1 if yield self.to_a[index]
+        end
+        index += 1
       end
-
-      index += 1
-    end
-
     count
   end
 
