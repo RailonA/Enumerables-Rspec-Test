@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enumerable
   # comment
 
@@ -62,12 +64,12 @@ module Enumerable
         return false unless yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |_item, _index|
-        return false unless _item.class.ancestors.include?(args)
+      arr.my_each_with_index do |item, _index|
+        return false unless item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |_item, _index|
-        return false unless _item.match(args)
+      arr.my_each_with_index do |item, _index|
+        return false unless item.match(args)
       end
     end
     true
@@ -84,13 +86,13 @@ module Enumerable
         any = true if yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |_item, _index|
-        puts _item.class.ancestors
-        any = true if _item.class.ancestors.include?(args)
+      arr.my_each_with_index do |item, _index|
+        puts item.class.ancestors
+        any = true if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |_item, _index|
-        any = true if _item.match(args)
+      arr.my_each_with_index do |item, _index|
+        any = true if item.match(args)
       end
     end
     any
@@ -105,12 +107,12 @@ module Enumerable
         return true unless yield arr[index]
       end
     elsif args.is_a? Class
-      arr.my_each_with_index do |_item, _index|
-        return true unless _item.class.ancestors.include?(args)
+      arr.my_each_with_index do |item, _index|
+        return true unless item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      arr.my_each_with_index do |_item, _index|
-        return true unless _item.match(args)
+      arr.my_each_with_index do |item, _index|
+        return true unless item.match(args)
       end
     end
     false
