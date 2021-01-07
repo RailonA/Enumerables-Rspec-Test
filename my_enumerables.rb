@@ -19,7 +19,7 @@ module Enumerable
         i += 1
       end
     end
-    arr
+    self
   end
 
   def my_each_with_index(pro = nil)
