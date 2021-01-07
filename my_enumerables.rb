@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
 module Enumerable
-  # comment
-
   def my_each(pro = nil)
     return to_enum unless block_given?
 
