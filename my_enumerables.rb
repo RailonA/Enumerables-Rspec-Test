@@ -133,17 +133,16 @@ module Enumerable
   end
 
   def my_map(pro = nil)
-    return to_enum unless block_given?
-
     arr = to_a
     arr2 = []
-    if pro
-      arr.my_each_with_index do |_item, index|
-        arr2.push(proc.cal(arr[index]))
-      end
-    else
-      arr.my_each_with_index do |_item, index|
-        arr2.push(yield arr[index])
+    arr.my_each_with_index do |item, index|
+      if block_given?
+        arr2.push(pro.call(arr[index])) if pro
+        arr2.push(yield(arr[index])) unless pro
+      elsif pro
+        arr2.push(pro.call(arr[index]))
+      else
+          arr2.push(yield arr[index])
       end
     end
     arr2
