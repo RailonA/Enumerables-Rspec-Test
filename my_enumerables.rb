@@ -55,8 +55,6 @@ module Enumerable
   end
 
   def my_all?(args = nil)
-    return to_enum unless block_given? || !args.nil?
-
     arr = to_a
     if block_given?
       arr.my_each_with_index do |_item, index|
@@ -68,9 +66,14 @@ module Enumerable
       end
     elsif args.is_a? Regexp
       arr.my_each_with_index do |item, _index|
-        return false unless item.match(args)
+        return false unless item.to_s.match(args)
+      end
+    else
+      arr.my_each_with_index do |item, _index|
+        return false if item == false or item.nil?
       end
     end
+
     true
   end
 
