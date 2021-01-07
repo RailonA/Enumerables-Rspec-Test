@@ -164,7 +164,7 @@ module Enumerable
     result = arg
 
     if arg.is_a? Symbol
-      i +=1
+      i += 1
       sym = arg
       result = self[0]
     end
