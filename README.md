@@ -1,10 +1,11 @@
 # Enumerable methods
  In this project we worked on simulating the original enumerable methods and creating ours.
 
+![screenshot](./screenshot.png)
+ 
 ## Built With
 
 - RUBY
-
 
 ## Usage
 

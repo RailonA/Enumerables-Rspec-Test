@@ -76,10 +76,11 @@ module Enumerable
 
   def my_any?(args = nil)
     any = false
+    arr = to_a
 
     if block_given?
       my_each_with_index do |_item, index|
-        any = true if yield self[index]
+        any = true if yield arr[index]
       end
     elsif args.is_a? Class
       my_each_with_index do |item, _index|
@@ -118,15 +119,15 @@ module Enumerable
 
   def my_count(arg = nil)
     count = index = 0
-    return length if arg.nil? && !block_given?
+    arr = to_a
+    return arr.length if arg.nil? && !block_given?
 
-    to_a
-    while index < to_a.length
-      if (arg.is_a?(Proc) && proc.call(to_a[index])) ||
-         (arg == to_a[index])
+    while index < arr.length
+      if (arg.is_a?(Proc) && proc.call(arr[index])) ||
+         (arg == arr[index])
         count += 1
       elsif block_given?
-        count += 1 if yield to_a[index]
+        count += 1 if yield arr[index]
       end
       index += 1
     end
@@ -134,6 +135,8 @@ module Enumerable
   end
 
   def my_map(pro = nil)
+    return to_enum unless block_given?
+
     arr = to_a
     arr2 = []
     arr.my_each_with_index do |_item, index|
@@ -168,7 +171,6 @@ module Enumerable
       if sym
         result = result.send sym, arr[i]
       elsif block_given?
-        p 'this one'
         result = yield result, arr[i]
       end
 
