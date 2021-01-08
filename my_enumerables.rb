@@ -160,7 +160,9 @@ module Enumerable
     i = block_given? ? 1 : 0
     result = arg
     result = arr[0] if !arg && block_given?
-
+    
+    i = 0 if arg.is_a?(Numeric) && block_given?
+      
     if arg.is_a? Symbol
       i += 1
       sym = arg
@@ -173,7 +175,6 @@ module Enumerable
       elsif block_given?
         result = yield result, arr[i]
       end
-
       i += 1
     end
 
