@@ -79,19 +79,19 @@ module Enumerable
     arr = to_a
 
     if block_given?
-      my_each_with_index do |item, index|
+      my_each_with_index do |_item, index|
         any = true if yield arr[index]
       end
     elsif args.is_a? Class
-      my_each_with_index do |item, index|
+      my_each_with_index do |item, _index|
         any = true if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      my_each_with_index do |item, index|
+      my_each_with_index do |item, _index|
         any = true if item.match(args)
       end
     else
-      my_each_with_index do |item, index|
+      my_each_with_index do |item, _index|
         any = true unless item == false || item.nil? || !item.to_s.match(args.to_s)
       end
     end
@@ -136,6 +136,7 @@ module Enumerable
 
   def my_map(pro = nil)
     return to_enum unless block_given?
+
     arr = to_a
     arr2 = []
     arr.my_each_with_index do |_item, index|
@@ -170,7 +171,6 @@ module Enumerable
       if sym
         result = result.send sym, arr[i]
       elsif block_given?
-        p 'this one'
         result = yield result, arr[i]
       end
 
