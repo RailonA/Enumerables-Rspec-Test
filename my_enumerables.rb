@@ -76,21 +76,22 @@ module Enumerable
 
   def my_any?(args = nil)
     any = false
+    arr = to_a
 
     if block_given?
-      my_each_with_index do |_item, index|
-        any = true if yield self[index]
+      my_each_with_index do |item, index|
+        any = true if yield arr[index]
       end
     elsif args.is_a? Class
-      my_each_with_index do |item, _index|
+      my_each_with_index do |item, index|
         any = true if item.class.ancestors.include?(args)
       end
     elsif args.is_a? Regexp
-      my_each_with_index do |item, _index|
+      my_each_with_index do |item, index|
         any = true if item.match(args)
       end
     else
-      my_each_with_index do |item, _index|
+      my_each_with_index do |item, index|
         any = true unless item == false || item.nil? || !item.to_s.match(args.to_s)
       end
     end
