@@ -7,7 +7,6 @@ module Enumerable
 
     arr = to_a
     i = 0
-
     if pro
       while i < arr.length
         proc.cal arr[i]
@@ -27,7 +26,6 @@ module Enumerable
 
     arr = to_a
     i = 0
-
     if pro
       while i < arr.length
         proc.cal arr[i], i
@@ -39,7 +37,6 @@ module Enumerable
         i += 1
       end
     end
-
     self
   end
 
@@ -56,7 +53,6 @@ module Enumerable
 
   def my_all?(args = nil)
     arr = to_a
-
     arr.my_each_with_index do |item, index|
       if block_given?
         return false unless yield arr[index]
@@ -70,14 +66,12 @@ module Enumerable
         return false
       end
     end
-
     true
   end
 
   def my_any?(args = nil)
     any = false
     arr = to_a
-
     if block_given?
       my_each_with_index do |_item, index|
         any = true if yield arr[index]
@@ -154,37 +148,31 @@ module Enumerable
 
   def my_inject(arg = nil, sym = nil)
     arr = to_a
-
     raise LocalJumpError if arg.nil? and !block_given?
 
     i = block_given? ? 1 : 0
     result = arg
     result = arr[0] if !arg && block_given?
-
+    i = 0 if arg.is_a?(Numeric) && block_given?
     if arg.is_a? Symbol
       i += 1
       sym = arg
       result = arr[0]
     end
-
     while i < arr.length
       if sym
         result = result.send sym, arr[i]
       elsif block_given?
         result = yield result, arr[i]
       end
-
       i += 1
     end
-
     result
   end
 end
-
 def multiply_els(arr = [])
   arr.my_inject { |total, item| total * item }
 end
-
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
