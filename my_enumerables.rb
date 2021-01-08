@@ -135,6 +135,7 @@ module Enumerable
   end
 
   def my_map(pro = nil)
+    return to_enum unless block_given?
     arr = to_a
     arr2 = []
     arr.my_each_with_index do |_item, index|
