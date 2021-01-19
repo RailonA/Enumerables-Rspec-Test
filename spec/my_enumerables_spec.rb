@@ -45,6 +45,19 @@ describe '#my_all?' do
 end
 
 
+describe '#my_any?' do 
+    it ' Test .my_any? to return the same as .all?' do 
+    expect(my_array.my_any?{ |value|  value }).to eq(my_array.any?{ |value|  value })
+    expect(my_array.my_any?(Numeric)).to eql(my_array.any?(Numeric))
+    expect(my_range.my_any?{ |value|  value }).to eql(my_range.any?{ |value|  value })
+    expect(my_range.my_any?(Numeric)).to eql(my_range.any?(Numeric))
+    expect(my_hash.my_any?{  |key, value|   value }).to eql(my_hash.any?{ |key, value|   value })
+    expect(my_text.my_any?{ |word| word.length >= 3 }).to eql(my_text.any?{ |word| word.length >= 3 })
+    expect(my_text.my_any?(/t/)).to eql(my_text.any?(/t/))
+    end
+end
+
+
 
 
 end
