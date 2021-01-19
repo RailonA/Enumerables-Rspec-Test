@@ -89,6 +89,14 @@ describe Enumerable do
     end
   end
 
+  describe '#my_inject' do
+    it ' Test .my_inject to return the same as .count?' do
+      expect(my_array.my_inject{ |value| value }).to eql(my_array.inject { |value| value })
+      expect(my_range.my_inject{ |value| value }).to eql(my_range.inject { |value| value })
+      expect(my_hash.my_inject{ |_key, value| value }).to eql(my_hash.inject { |_key, value| value })
+    end
+  end
+
 
 
 
