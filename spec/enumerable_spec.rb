@@ -16,22 +16,22 @@ describe Enumerable do
 
     # my_each -- range
     describe '#my_each' do
-        it 'return an array' do
+        it 'my_each should return an array' do
             expect(range.my_each{|x| x.even?}).to eq(range.each{|x| x.even?})
         end
     end
 
     # my_each_with_index
     describe '#my_each_with_index' do
-        it 'return an array' do
+        it 'my_each should return an array' do
             expect(array.my_each_with_index{|element, index| element * 2}).to eq(array.each_with_index{|element, index| element * 2})
         end
     end
 
     # my_each_with_index -- range
     describe '#my_each_with_index' do
-        it 'return an array' do
-            expect(range.my_each_with_index{|element, index| element * 2}).to eq(range.each_with_index{|element, index| element * 2})
+        it 'return an array from a range' do
+            expect(range.my_each_with_index{|element, index| element * index}).to eq(range.each_with_index{|element, index| element * index})
         end
     end
 
@@ -45,7 +45,7 @@ describe Enumerable do
 
     # my_select -- range
     describe '#my_select' do
-        it 'my_select should return even array' do
+        it 'my_select should return even array from range' do
             expect(range.select{|x| x.even?}).to eq(range.select{|x| x.even?})
         end
     end
@@ -61,7 +61,7 @@ describe Enumerable do
 
     # my_all without block or args
     describe '#my_all?' do
-        it 'my_all should return true' do
+        it 'my_all should return false' do
             expect([nil, true, 99].my_all? ).to eq([nil, true, 99].all? )
         end
     end
@@ -77,7 +77,7 @@ describe Enumerable do
 
     # my_all -- Pattern
     describe '#my_all?' do
-      it 'my_all should return true' do
+      it 'my_all should return false' do
           expect(%w[ant bear cat].my_all?(/t/) ).to eql(%w[ant bear cat].all?(/t/) )
       end
     end
@@ -109,7 +109,7 @@ describe Enumerable do
 
     # my_any -- Pattern
     describe '#my_any?' do
-      it 'my_any should return true' do
+      it 'my_any should return false' do
           expect(%w[ant bear cat].my_any?(/d/) ).to eq(%w[ant bear cat].any?(/d/) )
       end
     end
@@ -125,7 +125,7 @@ describe Enumerable do
 
     # my_none regex
     describe '#my_none?' do
-      it 'my_none should return false' do
+      it 'my_none should return true' do
           expect(%w{ant bear cat}.my_none?(/d/) ).to eq(%w{ant bear cat}.none?(/d/) )
       end
     end
@@ -133,7 +133,7 @@ describe Enumerable do
 
     # my_none with no block or pattern
     describe '#my_none?' do
-      it 'my_none should return false' do
+      it 'my_none should return true' do
           expect([].my_none?  ).to eq([].none?  )
       end
     end
@@ -141,7 +141,7 @@ describe Enumerable do
 
     # my_none -- class
     describe '#my_none?' do
-      it 'my_none should return false' do
+      it 'my_none should return true' do
           expect(array.my_none?(String)).to eq(array.none?(String))
       end
     end
@@ -173,7 +173,7 @@ describe Enumerable do
 
     # my_inject
     describe '#my_inject' do
-      it 'my_inject should return the same Total' do
+      it 'my_inject should return the same Total of a sum' do
           expect(array.my_inject{|total, element| total + element}).to eq(array.inject{|total, element| total + element})
       end
     end
@@ -181,7 +181,7 @@ describe Enumerable do
 
     # my_inject  -- Block and initial value
     describe '#my_inject' do
-      it 'my_inject should return the same Total' do
+      it 'my_inject should return the same Total of a multiplication' do
           expect((5..10).my_inject(1) { |product, n| product * n }).to eq((5..10).inject(1) { |product, n| product * n })
       end
     end
@@ -189,7 +189,7 @@ describe Enumerable do
 
     # my_inject  --  Symbol
     describe '#my_inject' do
-      it 'my_inject should return the same Total' do
+      it 'my_inject should return the same Total of a multiplication' do
           expect((5..10).my_inject(:*) ).to eq((5..10).inject(:*))
       end
     end
@@ -197,7 +197,7 @@ describe Enumerable do
 
     # my_inject  --  initial value and symbol
     describe '#my_inject' do
-      it 'my_inject should return the same Total' do
+      it 'my_inject should return the same Total of a sum' do
           expect((5..10).my_inject(12,:+)).to eq((5..10).inject(12,:+) )
       end
     end

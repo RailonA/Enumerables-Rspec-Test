@@ -1,19 +1,34 @@
-# Enumerable methods
- In this project we worked on simulating the original enumerable methods and creating ours.
+![](https://img.shields.io/badge/Microverse-blueviolet)
 
-![screenshot](./screenshot.png)
- 
+# RSpec Testing for Tic Tac Toe
+
+> Testing Enumerables methods using RSpec framework
+
+# Screenshot 
+
+![screenshot](./Screenshot.png)
+
 ## Built With
 
-- RUBY
+- Ruby
+- RSpec
 
-## Usage
+## Getting Started
 
-git clone https://github.com/Mohamed-js/Enumerables.git
+To get a local copy up and running follow these simple example steps.
 
-cd Enumerables
+### Install
 
-open my_enumerables.rb
+Install rspec following this guide: [Install](https://www.theodinproject.com/courses/ruby-programming/lessons/introduction-to-rspec)
+
+### Usage
+
+- Open your terminal (CTRL + ALT + T) and clone the repository of this project.
+- `cd` to the directory 
+
+### Run tests
+
+- run `rspec` to run the tests
 
 
 ## Authors
@@ -22,13 +37,13 @@ open my_enumerables.rb
 
 - GitHub: [Mohammed Atef](https://github.com/Mohamed-js)
 - Twitter: [@MohammedAtef](https://twitter.com/Demovejetta)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mohamed-atef-032b6b1b0/)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mohamed-atef-032b6b1b0/) 
 
-👤 **Rodrigo Ibaceta**
+👤 **Alicia Paz Rojas**
 
-- GitHub: [Rodrigo Ibateca](https://github.com/RokoVarano/)
-- Twitter: [@Rodrigo](https://twitter.com/RodrigoIbacet11)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/rodrigo-ibaceta-a8657611a/)
+- GitHub: [@aliciapaz](https://github.com/aliciapaz)
+- Twitter: [@_alicia_paz](https://twitter.com/_alicia_paz)
+- LinkedIn: [Alicia Rojas](https://www.linkedin.com/in/alicia-rojas-71468418a/)
 
 ## 🤝 Contributing
 
@@ -40,4 +55,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-Thanks for the both parties involved in the development of this project.
+- The Odin Project
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.
