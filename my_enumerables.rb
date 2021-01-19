@@ -148,7 +148,7 @@ module Enumerable
 
   def my_inject(arg = nil, sym = nil)
     arr = to_a
-    raise LocalJumpError if arg.nil? and !block_given?
+    raise LocalJumpError if arg.nil? && !block_given?
 
     i = block_given? ? 1 : 0
     result = arg
@@ -170,6 +170,7 @@ module Enumerable
     result
   end
 end
+
 def multiply_els(arr = [])
   arr.my_inject { |total, item| total * item }
 end
