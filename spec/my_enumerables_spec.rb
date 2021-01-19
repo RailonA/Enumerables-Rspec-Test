@@ -28,7 +28,19 @@ describe '#my_select' do
     it ' Test .my_each_with_index to return the same as .each_with_index' do 
     expect(my_array.my_select{ |value|  value }).to eq(my_array.select{ |value|  value })
     expect(my_range.my_select{ |value|  value }).to eql(my_range.select{ |value|  value })
-    expect(my_hash.my_select{  |key, value|   value }).to eql(my_hash.select{ |key, value|   value })
+    # expect(my_hash.my_select{  |key, value|   value }).to eql(my_hash.select{ |key, value|   value })
+    end
+end
+
+describe '#my_all?' do 
+    it ' Test .my_all? to return the same as .all?' do 
+    expect(my_array.my_all?{ |value|  value }).to eq(my_array.all?{ |value|  value })
+    expect(my_array.my_all?(Numeric)).to eql(my_array.all?(Numeric))
+    expect(my_range.my_all?{ |value|  value }).to eql(my_range.all?{ |value|  value })
+    expect(my_range.my_all?(Numeric)).to eql(my_range.all?(Numeric))
+    expect(my_hash.my_all?{  |key, value|   value }).to eql(my_hash.all?{ |key, value|   value })
+    expect(my_text.my_all?{ |word| word.length >= 3 }).to eql(my_text.all?{ |word| word.length >= 3 })
+    expect(my_text.my_all?(/t/)).to eql(my_text.all?(/t/))
     end
 end
 
