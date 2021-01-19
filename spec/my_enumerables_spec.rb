@@ -22,7 +22,19 @@ describe '#my_each_with_index' do
     expect(my_hash.my_each_with_index{ |value|  value }).to eql(my_hash.each_with_index{ |value|  value })
     end
 end
- 
+
+
+describe '#my_select' do 
+    it ' Test .my_each_with_index to return the same as .each_with_index' do 
+    expect(my_array.my_select{ |value|  value }).to eq(my_array.select{ |value|  value })
+    expect(my_range.my_select{ |value|  value }).to eql(my_range.select{ |value|  value })
+    expect(my_hash.my_select{  |key, value|   value }).to eql(my_hash.select{ |key, value|   value })
+    end
+end
+
+
+
+
 end
 
 
