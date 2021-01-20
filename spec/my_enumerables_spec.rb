@@ -1,3 +1,5 @@
+# rubocop:disable Layout/LineLength
+
 require_relative '../my_enumerables'
 
 describe Enumerable do
@@ -15,25 +17,25 @@ describe Enumerable do
       expect(my_range.my_each(&:even?)).to eql(my_range.each(&:even?))
     end
     it 'Test my_hash.my_each to return the same as my_hash.each' do
-      expect(my_hash.my_each { |value| value }).to eql(my_hash.each { |value| value })
+      expect(my_hash.my_each { |key, value| puts "#{key} is #{value}" }).to eql(my_hash.each { |key, value| puts "#{key} is #{value}" })
     end
   end
 
   describe '#my_each_with_index' do
     it ' Test my_array.my_each_with_index to return the same as my_array.each_with_index' do
-      expect(my_array.my_each_with_index { |value| value }).to eql(my_array.each { |value| value })
+      expect(my_array.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_array.each { |value, index| puts "#{value} #{index}" })
     end
     it ' Test my_range.my_each_with_index to return the same as my_range.each_with_index' do
-      expect(my_range.my_each_with_index { |value| value }).to eql(my_range.each { |value| value })
+      expect(my_range.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_range.each { |value, index| puts "#{value} #{index}" })
     end
     it ' Test my_hash.my_each_with_index to return the same as my_hash.each_with_index' do
-      expect(my_hash.my_each_with_index { |value| value }).to eql(my_hash.each { |value| value })
+      expect(my_hash.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_hash.each { |value, index| puts "#{value} #{index}" })
     end
   end
 
   describe '#my_select' do
     it ' Test my_array.my_each_with_index to return the same as my_array.each_with_index' do
-      expect(my_array.my_select { |value|  value }).to eql(my_array.select { |value| value })
+      expect(my_array.my_select { |value| value }).to eql(my_array.select { |value| value })
     end
     it ' Test my_range.my_each_with_index to return the same as my_range.each_with_index' do
       expect(my_range.my_select { |value| value }).to eql(my_range.select { |value| value })
@@ -94,104 +96,101 @@ describe Enumerable do
   describe '#my_none?' do
     it ' Test my_array.my_none? { |value| value } to return the same as my_array.none? { |value| value }' do
       expect(my_array.my_none? { |value| value }).to eql(my_array.none? { |value| value })
-      it ' Test my_array.my_none?(Numeric) to return the same as my_array.none?(Numeric)' do
-        expect(my_array.my_none?(Numeric)).to eql(my_array.none?(Numeric))
-      end
-      it ' Test my_range.my_none? { |value| value } to return the same as my_range.none? { |value| value }' do
-        expect(my_range.my_none? { |value| value }).to eql(my_range.none? { |value| value })
-      end
-      it ' Test my_range.my_none?(Numeric) to return the same as my_range.none?(Numeric)' do
-        expect(my_range.my_none?(Numeric)).to eql(my_range.none?(Numeric))
-      end
-      it ' Test my_hash.my_none? { |_key, value| value } to return the same as my_hash.none? { |_key, value| value }' do
-        expect(my_hash.my_none? { |_key, value| value }).to eql(my_hash.none? { |_key, value| value })
-      end
-      it ' Test my_text.my_none? { |word| word.length >= 3 } to return the same as my_text.none? { |word| word.length >= 3 }' do
-        expect(my_text.my_none? { |word| word.length >= 3 }).to eql(my_text.none? { |word| word.length >= 3 })
-      end
-      it ' Test my_text.my_none?(/t/) to return the same as my_text.none?(/t/)' do
-        expect(my_text.my_none?(/t/)).to eql(my_text.none?(/t/))
-      end
+    end
+    it ' Test my_array.my_none?(Numeric) to return the same as my_array.none?(Numeric)' do
+      expect(my_array.my_none?(Numeric)).to eql(my_array.none?(Numeric))
+    end
+    it ' Test my_range.my_none? { |value| value } to return the same as my_range.none? { |value| value }' do
+      expect(my_range.my_none? { |value| value }).to eql(my_range.none? { |value| value })
+    end
+    it ' Test my_range.my_none?(Numeric) to return the same as my_range.none?(Numeric)' do
+      expect(my_range.my_none?(Numeric)).to eql(my_range.none?(Numeric))
+    end
+    it ' Test my_hash.my_none? { |_key, value| value } to return the same as my_hash.none? { |_key, value| value }' do
+      expect(my_hash.my_none? { |_key, value| value }).to eql(my_hash.none? { |_key, value| value })
+    end
+    it ' Test my_text.my_none? { |word| word.length >= 3 } to return the same as my_text.none? { |word| word.length >= 3 }' do
+      expect(my_text.my_none? { |word| word.length >= 3 }).to eql(my_text.none? { |word| word.length >= 3 })
+    end
+    it ' Test my_text.my_none?(/t/) to return the same as my_text.none?(/t/)' do
+      expect(my_text.my_none?(/t/)).to eql(my_text.none?(/t/))
     end
   end
 
   describe '#my_count' do
     it ' Test my_array.my_count{ |value| value } to return the same as my_array.count { |value| value }' do
-      expect(my_array.my_count{ |value| value }).to eql(my_array.count { |value| value })
+      expect(my_array.my_count { |value| value }).to eql(my_array.count { |value| value })
     end
     it ' Test my_array.my_count(Numeric) to return the same as my_array.count(Numeric)' do
       expect(my_array.my_count(Numeric)).to eql(my_array.count(Numeric))
     end
     it ' Test my_range.my_count{ |value| value } to return the same as my_range.count { |value| value }' do
-      expect(my_range.my_count{ |value| value }).to eql(my_range.count { |value| value })
+      expect(my_range.my_count { |value| value }).to eql(my_range.count { |value| value })
     end
     it ' Test my_range.my_count(Numeric) to return the same as my_range.count(Numeric)' do
       expect(my_range.my_count(Numeric)).to eql(my_range.count(Numeric))
     end
     it ' Test my_hash.my_count{ |_key, value| value } to return the same as my_hash.count { |_key, value| value }' do
-      expect(my_hash.my_count{ |_key, value| value }).to eql(my_hash.count { |_key, value| value })
+      expect(my_hash.my_count { |_key, value| value }).to eql(my_hash.count { |_key, value| value })
     end
     it ' Test my_text.my_count{ |word| word.length >= 3 } to return the same as my_text.count { |word| word.length >= 3 }' do
-      expect(my_text.my_count{ |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
+      expect(my_text.my_count { |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
     end
     it ' Test my_text.my_count(/t/) to return the same as my_text.count(/t/)' do
       expect(my_text.my_count(/t/)).to eql(my_text.count(/t/))
     end
   end
 
-
   describe '#my_map' do
     it ' Test my_array.my_map{ |value| value } to return the same as my_array.map { |value| value }' do
-      expect(my_array.my_map{ |value| value }).to eql(my_array.map { |value| value })
-
+      expect(my_array.my_map { |value| value }).to eql(my_array.map { |value| value })
     end
     it ' Test my_range.my_map{ |value| value } to return the same as my_range.map { |value| value }' do
-      expect(my_range.my_map{ |value| value }).to eql(my_range.map { |value| value })
-
+      expect(my_range.my_map { |value| value }).to eql(my_range.map { |value| value })
     end
     it ' Test my_hash.my_map{ |_key, value| value } to return the same as my_hash.map { |_key, value| value }' do
-      expect(my_hash.my_map{ |_key, value| value }).to eql(my_hash.map { |_key, value| value })
+      expect(my_hash.my_map { |_key, value| value }).to eql(my_hash.map { |_key, value| value })
     end
     it ' Test my_text.my_map{ |word| word.length >= 3 } to return the same as my_text.map { |word| word.length >= 3 ' do
-      expect(my_text.my_map{ |word| word.length >= 3 }).to eql(my_text.map { |word| word.length >= 3 })
+      expect(my_text.my_map { |word| word.length >= 3 }).to eql(my_text.map { |word| word.length >= 3 })
     end
   end
 
   describe '#my_inject' do
     it ' Test (my_array.my_inject{ |value| value } to return the same as my_array.inject { |value| value }' do
-      expect(my_array.my_inject{ |value| value }).to eql(my_array.inject { |value| value })
+      expect(my_array.my_inject { |value| value }).to eql(my_array.inject { |value| value })
     end
     it ' Test my_range.my_inject{ |value| value } to return the same as my_range.inject { |value| value }' do
-      expect(my_range.my_inject{ |value| value }).to eql(my_range.inject { |value| value })
+      expect(my_range.my_inject { |value| value }).to eql(my_range.inject { |value| value })
     end
     it ' Test my_hash.my_inject{ |_key, value| value } to return the same as my_hash.inject { |_key, value| value }' do
-      expect(my_hash.my_inject{ |_key, value| value }).to eql(my_hash.inject { |_key, value| value })
+      expect(my_hash.my_inject { |_key, value| value }).to eql(my_hash.inject { |_key, value| value })
     end
   end
 
-
   describe '#my_count' do
     it ' Test my_array.my_count{ |value| value } to return the same as my_array.count { |value| value }' do
-      expect(my_array.my_count{ |value| value }).to eql(my_array.count { |value| value })
+      expect(my_array.my_count { |value| value }).to eql(my_array.count { |value| value })
     end
     it ' Test my_array.my_count(Numeric) to return the same as my_array.count(Numeric)' do
       expect(my_array.my_count(Numeric)).to eql(my_array.count(Numeric))
     end
     it ' Test my_range.my_count{ |value| value } to return the same as my_range.count { |value| value }' do
-      expect(my_range.my_count{ |value| value }).to eql(my_range.count { |value| value })
+      expect(my_range.my_count { |value| value }).to eql(my_range.count { |value| value })
     end
     it ' Test my_range.my_count(Numeric) to return the same as my_range.count(Numeric)' do
       expect(my_range.my_count(Numeric)).to eql(my_range.count(Numeric))
     end
     it ' Test my_hash.my_count{ |_key, value| value } to return the same as my_hash.count { |_key, value| value }' do
-      expect(my_hash.my_count{ |_key, value| value }).to eql(my_hash.count { |_key, value| value })
+      expect(my_hash.my_count { |_key, value| value }).to eql(my_hash.count { |_key, value| value })
     end
     it ' Test my_text.my_count{ |word| word.length >= 3 } to return the same as my_text.count { |word| word.length >= 3 }' do
-      expect(my_text.my_count{ |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
+      expect(my_text.my_count { |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
     end
     it ' Test my_text.my_count(/t/) to return the same as my_text.count(/t/)' do
       expect(my_text.my_count(/t/)).to eql(my_text.count(/t/))
     end
   end
-
 end
+
+# rubocop:enable Layout/LineLength
