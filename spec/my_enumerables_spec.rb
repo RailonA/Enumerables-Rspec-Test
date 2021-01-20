@@ -216,28 +216,28 @@ describe Enumerable do
   end
 
   describe '#my_map' do
-    it ' Test my_array.my_map{ |value| value } to return the same as my_array.map { |value| value }' do
+    it 'Compares the result of my_map enumerable after running through my_array to the original enumerable map' do
       expect(my_array.my_map { |value| value }).to eql(my_array.map { |value| value })
     end
-    it ' Test my_range.my_map{ |value| value } to return the same as my_range.map { |value| value }' do
+    it 'Compares the result of my_map enumerable after running through my_range to the original enumerable map' do
       expect(my_range.my_map { |value| value }).to eql(my_range.map { |value| value })
     end
-    it ' Test my_hash.my_map{ |_key, value| value } to return the same as my_hash.map { |_key, value| value }' do
+    it 'Compares the result of my_map enumerable after running through my_hash to the original enumerable map' do
       expect(my_hash.my_map { |_key, value| value }).to eql(my_hash.map { |_key, value| value })
     end
-    it ' Test my_text.my_map{ |word| word.length >= 3 } to return the same as my_text.map { |word| word.length >= 3 ' do
+    it 'Compares the result of my_map enumerable after running through my_text to the original enumerable map' do
       expect(my_text.my_map { |word| word.length >= 3 }).to eql(my_text.map { |word| word.length >= 3 })
     end
-    it ' Compares the output when being used on an array without any blocks or arguments' do
+    it 'Compares the output of my_map enumerable after running through my_array without any arguments or block given' do
       expect(my_array.my_map.to_a).to eql(my_array.map.to_a)
     end
-    it ' Compares the output when being used on a a range without any blocks or arguments' do
+    it 'Compares the output of my_map enumerable after running through my_range without any arguments or block given' do
       expect(my_range.my_map.to_a).to eql(my_range.map.to_a)
     end
-    it ' Compares the output when being used on a a hash without any blocks or arguments' do
+    it 'Compares the output of my_map enumerable after running through my_hash without any arguments or block given' do
       expect(my_hash.my_map.to_a).to eql(my_hash.map.to_a)
     end
-    it ' Compares the output when being used on an array of text without any blocks or arguments' do
+    it 'Compares the output of my_map enumerable after running through my_text without any arguments or block given' do
       expect(my_text.my_map.to_a).to eql(my_text.map.to_a)
     end
   end
