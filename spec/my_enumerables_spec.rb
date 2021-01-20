@@ -68,13 +68,25 @@ describe Enumerable do
   end
 
   describe '#my_any?' do
-    it ' Test .my_any? to return the same as .all?' do
+    it ' Test my_array.my_any? { |value| value } to return the same as my_array.any? { |value| value }' do
       expect(my_array.my_any? { |value| value }).to eql(my_array.any? { |value| value })
+    end
+    it ' Test my_array.my_any?(Numeric) to return the same as my_array.any?(Numeric)' do
       expect(my_array.my_any?(Numeric)).to eql(my_array.any?(Numeric))
+    end
+    it ' Test my_range.my_any? { |value| value } to return the same as my_range.any? { |value| value }' do
       expect(my_range.my_any? { |value| value }).to eql(my_range.any? { |value| value })
+    end
+    it ' Test my_range.my_any?(Numeric) to return the same as my_range.any?(Numeric)' do
       expect(my_range.my_any?(Numeric)).to eql(my_range.any?(Numeric))
+    end
+    it ' Test my_hash.my_any? { |_key, value| value } to return the same as my_hash.any? { |_key, value| value }' do
       expect(my_hash.my_any? { |_key, value| value }).to eql(my_hash.any? { |_key, value| value })
+    end
+    it ' Test my_text.my_any? { |word| word.length >= 3 } to return the same as my_text.any? { |word| word.length >= 3 }' do
       expect(my_text.my_any? { |word| word.length >= 3 }).to eql(my_text.any? { |word| word.length >= 3 })
+    end
+    it ' Test my_text.my_any?(/t/) to return the same as my_text.any?(/t/)' do
       expect(my_text.my_any?(/t/)).to eql(my_text.any?(/t/))
     end
   end
