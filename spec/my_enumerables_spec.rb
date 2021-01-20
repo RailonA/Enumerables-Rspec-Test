@@ -92,14 +92,26 @@ describe Enumerable do
   end
 
   describe '#my_none?' do
-    it ' Test .my_any? to return the same as .all?' do
+    it ' Test my_array.my_none? { |value| value } to return the same as my_array.none? { |value| value }' do
       expect(my_array.my_none? { |value| value }).to eql(my_array.none? { |value| value })
-      expect(my_array.my_none?(Numeric)).to eql(my_array.none?(Numeric))
-      expect(my_range.my_none? { |value| value }).to eql(my_range.none? { |value| value })
-      expect(my_range.my_none?(Numeric)).to eql(my_range.none?(Numeric))
-      expect(my_hash.my_none? { |_key, value| value }).to eql(my_hash.none? { |_key, value| value })
-      expect(my_text.my_none? { |word| word.length >= 3 }).to eql(my_text.none? { |word| word.length >= 3 })
-      expect(my_text.my_none?(/t/)).to eql(my_text.none?(/t/))
+      it ' Test my_array.my_none?(Numeric) to return the same as my_array.none?(Numeric)' do
+        expect(my_array.my_none?(Numeric)).to eql(my_array.none?(Numeric))
+      end
+      it ' Test my_range.my_none? { |value| value } to return the same as my_range.none? { |value| value }' do
+        expect(my_range.my_none? { |value| value }).to eql(my_range.none? { |value| value })
+      end
+      it ' Test my_range.my_none?(Numeric) to return the same as my_range.none?(Numeric)' do
+        expect(my_range.my_none?(Numeric)).to eql(my_range.none?(Numeric))
+      end
+      it ' Test my_hash.my_none? { |_key, value| value } to return the same as my_hash.none? { |_key, value| value }' do
+        expect(my_hash.my_none? { |_key, value| value }).to eql(my_hash.none? { |_key, value| value })
+      end
+      it ' Test my_text.my_none? { |word| word.length >= 3 } to return the same as my_text.none? { |word| word.length >= 3 }' do
+        expect(my_text.my_none? { |word| word.length >= 3 }).to eql(my_text.none? { |word| word.length >= 3 })
+      end
+      it ' Test my_text.my_none?(/t/) to return the same as my_text.none?(/t/)' do
+        expect(my_text.my_none?(/t/)).to eql(my_text.none?(/t/))
+      end
     end
   end
 
