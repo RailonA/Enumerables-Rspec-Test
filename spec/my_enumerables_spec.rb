@@ -171,13 +171,25 @@ describe Enumerable do
 
 
   describe '#my_count' do
-    it ' Test .my_count to return the same as .count?' do
+    it ' Test my_array.my_count{ |value| value } to return the same as my_array.count { |value| value }' do
       expect(my_array.my_count{ |value| value }).to eql(my_array.count { |value| value })
+    end
+    it ' Test my_array.my_count(Numeric) to return the same as my_array.count(Numeric)' do
       expect(my_array.my_count(Numeric)).to eql(my_array.count(Numeric))
+    end
+    it ' Test my_range.my_count{ |value| value } to return the same as my_range.count { |value| value }' do
       expect(my_range.my_count{ |value| value }).to eql(my_range.count { |value| value })
+    end
+    it ' Test my_range.my_count(Numeric) to return the same as my_range.count(Numeric)' do
       expect(my_range.my_count(Numeric)).to eql(my_range.count(Numeric))
+    end
+    it ' Test my_hash.my_count{ |_key, value| value } to return the same as my_hash.count { |_key, value| value }' do
       expect(my_hash.my_count{ |_key, value| value }).to eql(my_hash.count { |_key, value| value })
+    end
+    it ' Test my_text.my_count{ |word| word.length >= 3 } to return the same as my_text.count { |word| word.length >= 3 }' do
       expect(my_text.my_count{ |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
+    end
+    it ' Test my_text.my_count(/t/) to return the same as my_text.count(/t/)' do
       expect(my_text.my_count(/t/)).to eql(my_text.count(/t/))
     end
   end
