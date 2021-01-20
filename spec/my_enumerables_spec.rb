@@ -41,7 +41,7 @@ describe Enumerable do
       expect(my_range.my_select { |value| value }).to eql(my_range.select { |value| value })
     end
     it ' Test my_hash.my_each_with_index to return the same as my_hash.each_with_index' do
-      # expect(my_hash.my_select{  |key, value|   value }).to eql(my_hash.select{ |key, value|   value })
+      expect(my_hash.my_select{  |key, value|   value }).to eql(my_hash.select{ |key, value|   key })
     end
   end
 

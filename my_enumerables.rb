@@ -41,14 +41,21 @@ module Enumerable
   end
 
   def my_select
-    return to_enum unless block_given?
+    return to_enum :my_select unless block_given?
 
-    arr = to_a
-    arr2 = []
-    arr.my_each_with_index do |_item, index|
-      arr2.push(arr[index]) if yield arr[index]
+    return_arr = []
+    return_hash = {}
+    if is_a?(Hash)
+      my_each do |key, val|
+        return_hash[key] = val if yield(key, val)
+      end
+      return_hash
+    else
+      my_each do |val|
+        return_arr.push(val) if yield(val)
+      end
+      return_arr
     end
-    arr2
   end
 
   def my_all?(args = nil)
