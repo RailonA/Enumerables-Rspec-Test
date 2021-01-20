@@ -61,6 +61,15 @@ describe Enumerable do
     it ' Test my_hash.my_each_with_index to return the same as my_hash.each_with_index' do
       expect(my_hash.my_select { |key, value| puts "#{key} is #{value}" }).to eql(my_hash.select { |key, value| puts "#{key} is #{value}" })
     end
+    it 'Compares array output without a block ' do
+      expect(my_array.my_select.to_a).to eql(my_array.select.to_a)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_range.my_select.to_a).to eql(my_range.select.to_a)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_hash.my_select.to_a).to eql(my_hash.select.to_a)
+    end
   end
 
   describe '#my_all?' do
