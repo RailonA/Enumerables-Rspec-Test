@@ -243,13 +243,13 @@ describe Enumerable do
   end
 
   describe '#my_inject' do
-    it ' Test (my_array.my_inject{ |value| value } to return the same as my_array.inject { |value| value }' do
+    it 'Compares the result of my_inject enumerable after running through my_array to the original enumerable inject ' do
       expect(my_array.my_inject { |value| value }).to eql(my_array.inject { |value| value })
     end
-    it ' Test my_range.my_inject{ |value| value } to return the same as my_range.inject { |value| value }' do
+    it 'Compares the result of my_inject enumerable after running through my_range to the original enumerable inject' do
       expect(my_range.my_inject { |value| value }).to eql(my_range.inject { |value| value })
     end
-    it ' Test my_hash.my_inject{ |_key, value| value } to return the same as my_hash.inject { |_key, value| value }' do
+    it 'Compares the result of my_inject enumerable after running through my_hash to the original enumerable inject ' do
       expect(my_hash.my_inject { |_key, value| value }).to eql(my_hash.inject { |_key, value| value })
     end
     it ' Raises LocalJumpError when no block is given' do
