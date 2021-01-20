@@ -202,6 +202,18 @@ describe Enumerable do
     it ' Test my_text.my_count(/t/) to return the same as my_text.count(/t/)' do
       expect(my_text.my_count(/t/)).to eql(my_text.count(/t/))
     end
+    it ' Compares the output when being used on an array without any arguments or blocks ' do
+      expect(my_array.my_count).to eql(my_array.count)
+    end
+    it ' Compares the output when being used on a range without any arguments or blocks ' do
+      expect(my_range.my_count).to eql(my_range.count)
+    end
+    it ' Compares the output when being used on a hash without any arguments or blocks ' do
+      expect(my_hash.my_count).to eql(my_hash.count)
+    end
+    it ' Compares the output when being used on an array of strings without any arguments or blocks ' do
+      expect(my_text.my_count).to eql(my_text.count)
+    end
   end
 
   describe '#my_map' do
@@ -217,6 +229,18 @@ describe Enumerable do
     it ' Test my_text.my_map{ |word| word.length >= 3 } to return the same as my_text.map { |word| word.length >= 3 ' do
       expect(my_text.my_map { |word| word.length >= 3 }).to eql(my_text.map { |word| word.length >= 3 })
     end
+    it ' Compares the output when being used on an array without any blocks or arguments' do
+      expect(my_array.my_map.to_a).to eql(my_array.map.to_a)
+    end
+    it ' Compares the output when being used on a a range without any blocks or arguments' do
+      expect(my_range.my_map.to_a).to eql(my_range.map.to_a)
+    end
+    it ' Compares the output when being used on a a hash without any blocks or arguments' do
+      expect(my_hash.my_map.to_a).to eql(my_hash.map.to_a)
+    end
+    it ' Compares the output when being used on an array of text without any blocks or arguments' do
+      expect(my_text.my_map.to_a).to eql(my_text.map.to_a)
+    end
   end
 
   describe '#my_inject' do
@@ -229,29 +253,8 @@ describe Enumerable do
     it ' Test my_hash.my_inject{ |_key, value| value } to return the same as my_hash.inject { |_key, value| value }' do
       expect(my_hash.my_inject { |_key, value| value }).to eql(my_hash.inject { |_key, value| value })
     end
-  end
-
-  describe '#my_count' do
-    it ' Test my_array.my_count{ |value| value } to return the same as my_array.count { |value| value }' do
-      expect(my_array.my_count { |value| value }).to eql(my_array.count { |value| value })
-    end
-    it ' Test my_array.my_count(Numeric) to return the same as my_array.count(Numeric)' do
-      expect(my_array.my_count(Numeric)).to eql(my_array.count(Numeric))
-    end
-    it ' Test my_range.my_count{ |value| value } to return the same as my_range.count { |value| value }' do
-      expect(my_range.my_count { |value| value }).to eql(my_range.count { |value| value })
-    end
-    it ' Test my_range.my_count(Numeric) to return the same as my_range.count(Numeric)' do
-      expect(my_range.my_count(Numeric)).to eql(my_range.count(Numeric))
-    end
-    it ' Test my_hash.my_count{ |_key, value| value } to return the same as my_hash.count { |_key, value| value }' do
-      expect(my_hash.my_count { |_key, value| value }).to eql(my_hash.count { |_key, value| value })
-    end
-    it ' Test my_text.my_count{ |word| word.length >= 3 } to return the same as my_text.count { |word| word.length >= 3 }' do
-      expect(my_text.my_count { |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
-    end
-    it ' Test my_text.my_count(/t/) to return the same as my_text.count(/t/)' do
-      expect(my_text.my_count(/t/)).to eql(my_text.count(/t/))
+    it ' Raises LocalJumpError when no block is given' do
+      expect { my_array.my_inject }.to raise_error(LocalJumpError)
     end
   end
 end
