@@ -180,37 +180,37 @@ describe Enumerable do
   end
 
   describe '#my_count' do
-    it ' Test my_array.my_count{ |value| value } to return the same as my_array.count { |value| value }' do
+    it 'Compares the result of my_count enumerable after running through my_text to the original enumerable count' do
       expect(my_array.my_count { |value| value }).to eql(my_array.count { |value| value })
     end
-    it ' Test my_array.my_count(Numeric) to return the same as my_array.count(Numeric)' do
+    it 'Compares the result of my_count enumerable after running through my_array with (Numeric) to the  to the original enumerable count' do
       expect(my_array.my_count(Numeric)).to eql(my_array.count(Numeric))
     end
-    it ' Test my_range.my_count{ |value| value } to return the same as my_range.count { |value| value }' do
+    it 'Compares the result of my_count enumerable after running through my_text to the original enumerable count' do
       expect(my_range.my_count { |value| value }).to eql(my_range.count { |value| value })
     end
-    it ' Test my_range.my_count(Numeric) to return the same as my_range.count(Numeric)' do
+    it 'Compares the result of my_count enumerable after running through my_array with (Numeric) to the  to the original enumerable count' do
       expect(my_range.my_count(Numeric)).to eql(my_range.count(Numeric))
     end
-    it ' Test my_hash.my_count{ |_key, value| value } to return the same as my_hash.count { |_key, value| value }' do
+    it 'Compares the result of my_count enumerable after running through my_text to the original enumerable count' do
       expect(my_hash.my_count { |_key, value| value }).to eql(my_hash.count { |_key, value| value })
     end
-    it ' Test my_text.my_count{ |word| word.length >= 3 } to return the same as my_text.count { |word| word.length >= 3 }' do
+    it 'Compares the result of my_count enumerable after running through my_text to the original enumerable count' do
       expect(my_text.my_count { |word| word.length >= 3 }).to eql(my_text.count { |word| word.length >= 3 })
     end
-    it ' Test my_text.my_count(/t/) to return the same as my_text.count(/t/)' do
+    it 'Compares the result of my_count enumerable after running through my_text with (/t/) to the original enumerable count' do
       expect(my_text.my_count(/t/)).to eql(my_text.count(/t/))
     end
-    it ' Compares the output when being used on an array without any arguments or blocks ' do
+    it 'Compares the output of my_count enumerable after running through my_array without any arguments or block given' do
       expect(my_array.my_count).to eql(my_array.count)
     end
-    it ' Compares the output when being used on a range without any arguments or blocks ' do
+    it 'Compares the output of my_count enumerable after running through my_range without any arguments or block given' do
       expect(my_range.my_count).to eql(my_range.count)
     end
-    it ' Compares the output when being used on a hash without any arguments or blocks ' do
+    it 'Compares the output of my_count enumerable after running through my_hash without any arguments or block given' do
       expect(my_hash.my_count).to eql(my_hash.count)
     end
-    it ' Compares the output when being used on an array of strings without any arguments or blocks ' do
+    it 'Compares the output of my_count enumerable after running through my_text without any arguments or block given' do
       expect(my_text.my_count).to eql(my_text.count)
     end
   end
