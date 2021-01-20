@@ -141,18 +141,30 @@ describe Enumerable do
 
 
   describe '#my_map' do
-    it ' Test .my_map to return the same as .map?' do
+    it ' Test my_array.my_map{ |value| value } to return the same as my_array.map { |value| value }' do
       expect(my_array.my_map{ |value| value }).to eql(my_array.map { |value| value })
+
+    end
+    it ' Test my_range.my_map{ |value| value } to return the same as my_range.map { |value| value }' do
       expect(my_range.my_map{ |value| value }).to eql(my_range.map { |value| value })
+
+    end
+    it ' Test my_hash.my_map{ |_key, value| value } to return the same as my_hash.map { |_key, value| value }' do
       expect(my_hash.my_map{ |_key, value| value }).to eql(my_hash.map { |_key, value| value })
+    end
+    it ' Test my_text.my_map{ |word| word.length >= 3 } to return the same as my_text.map { |word| word.length >= 3 ' do
       expect(my_text.my_map{ |word| word.length >= 3 }).to eql(my_text.map { |word| word.length >= 3 })
     end
   end
 
   describe '#my_inject' do
-    it ' Test .my_inject to return the same as .count?' do
+    it ' Test (my_array.my_inject{ |value| value } to return the same as my_array.inject { |value| value }' do
       expect(my_array.my_inject{ |value| value }).to eql(my_array.inject { |value| value })
+    end
+    it ' Test my_range.my_inject{ |value| value } to return the same as my_range.inject { |value| value }' do
       expect(my_range.my_inject{ |value| value }).to eql(my_range.inject { |value| value })
+    end
+    it ' Test my_hash.my_inject{ |_key, value| value } to return the same as my_hash.inject { |_key, value| value }' do
       expect(my_hash.my_inject{ |_key, value| value }).to eql(my_hash.inject { |_key, value| value })
     end
   end
