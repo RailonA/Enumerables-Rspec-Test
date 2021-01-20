@@ -19,6 +19,15 @@ describe Enumerable do
     it 'Test my_hash.my_each to return the same as my_hash.each' do
       expect(my_hash.my_each { |key, value| puts "#{key} is #{value}" }).to eql(my_hash.each { |key, value| puts "#{key} is #{value}" })
     end
+    it 'Compares the output of each element in the array when no block or argument is given' do
+      expect(my_array.my_each.to_a).to eq(my_array.each.to_a)
+    end
+    it 'Compares the output of each element in the range when no block or argument is given' do
+      expect(my_range.my_each.to_a).to eq(my_range.each.to_a)
+    end
+    it 'Compares the output of each element in the hash when no block or argument is given' do
+      expect(my_hash.my_each.to_a).to eq(my_hash.each.to_a)
+    end
   end
 
   describe '#my_each_with_index' do
