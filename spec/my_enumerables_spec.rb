@@ -94,6 +94,18 @@ describe Enumerable do
     it ' Test my_text.my_all?(/t/) to return the same as my_text.all?(/t/)' do
       expect(my_text.my_all?(/t/)).to eql(my_text.all?(/t/))
     end
+    it 'Compares array output without a block ' do
+      expect(my_array.my_all?.to_s).to eql(my_array.all?.to_s)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_range.my_all?.to_s).to eql(my_range.all?.to_s)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_hash.my_all?.to_s).to eql(my_hash.all?.to_s)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_text.my_all?.to_s).to eql(my_text.all?.to_s)
+    end
   end
 
   describe '#my_any?' do
@@ -118,6 +130,18 @@ describe Enumerable do
     it ' Test my_text.my_any?(/t/) to return the same as my_text.any?(/t/)' do
       expect(my_text.my_any?(/t/)).to eql(my_text.any?(/t/))
     end
+    it 'Compares array output without a block ' do
+      expect(my_array.my_any?.to_s).to eql(my_array.my_any?.to_s)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_range.my_any?.to_s).to eql(my_range.my_any?.to_s)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_hash.my_any?.to_s).to eql(my_hash.my_any?.to_s)
+    end
+    it 'Compares array output without a block ' do
+      expect(my_text.my_any?.to_s).to eql(my_text.my_any?.to_s)
+    end
   end
 
   describe '#my_none?' do
@@ -141,6 +165,18 @@ describe Enumerable do
     end
     it ' Test my_text.my_none?(/t/) to return the same as my_text.none?(/t/)' do
       expect(my_text.my_none?(/t/)).to eql(my_text.none?(/t/))
+    end
+    it 'Compares array output without a block or argument ' do
+      expect(my_array.my_none?.to_s).to eql(my_array.my_none?.to_s)
+    end
+    it 'Compares array output without a block or argument ' do
+      expect(my_range.my_none?.to_s).to eql(my_range.my_none?.to_s)
+    end
+    it 'Compares array output without a block or argument ' do
+      expect(my_hash.my_none?.to_s).to eql(my_hash.my_none?.to_s)
+    end
+    it 'Compares array output without a block or argument ' do
+      expect(my_text.my_none?.to_s).to eql(my_text.my_none?.to_s)
     end
   end
 
