@@ -1,5 +1,4 @@
 # rubocop:disable Layout/LineLength
-
 require_relative '../my_enumerables'
 
 describe Enumerable do
@@ -8,7 +7,6 @@ describe Enumerable do
   let(:my_text) { %w[ant bear cat] }
   let(:arg) { proc { |value| value * 2 } }
   let(:my_range) { (1..9) }
-
 
   describe '#my_each' do
     it 'Compares the result of my_each enumerable after running through my_array to the original enumerable each' do
@@ -109,39 +107,38 @@ describe Enumerable do
     end
   end
 
-
   describe '#my_any?' do
-    it ' Test my_array.my_any? { |value| value } to return the same as my_array.any? { |value| value }' do
+    it 'Compares the result of my_any? enumerable after running through my_array to the original enumerable any?' do
       expect(my_array.my_any? { |value| value }).to eql(my_array.any? { |value| value })
     end
-    it ' Test my_array.my_any?(Numeric) to return the same as my_array.any?(Numeric)' do
+    it 'Compares the result of my_any? enumerable after running through my_array with (Numeric) to the  to the original enumerable any?' do
       expect(my_array.my_any?(Numeric)).to eql(my_array.any?(Numeric))
     end
-    it ' Test my_range.my_any? { |value| value } to return the same as my_range.any? { |value| value }' do
+    it 'Compares the result of my_any? enumerable after running through my_range to the original enumerable any?' do
       expect(my_range.my_any? { |value| value }).to eql(my_range.any? { |value| value })
     end
-    it ' Test my_range.my_any?(Numeric) to return the same as my_range.any?(Numeric)' do
+    it 'Compares the result of my_any? enumerable after running through my_range with (Numeric) to the  to the original enumerable any?' do
       expect(my_range.my_any?(Numeric)).to eql(my_range.any?(Numeric))
     end
-    it ' Test my_hash.my_any? { |_key, value| value } to return the same as my_hash.any? { |_key, value| value }' do
+    it 'Compares the result of my_any? enumerable after running through my_hash to the original enumerable any?' do
       expect(my_hash.my_any? { |_key, value| value }).to eql(my_hash.any? { |_key, value| value })
     end
-    it ' Test my_text.my_any? { |word| word.length >= 3 } to return the same as my_text.any? { |word| word.length >= 3 }' do
+    it 'Compares the result of my_any? enumerable after running through my_text to the original enumerable any?' do
       expect(my_text.my_any? { |word| word.length >= 3 }).to eql(my_text.any? { |word| word.length >= 3 })
     end
-    it ' Test my_text.my_any?(/t/) to return the same as my_text.any?(/t/)' do
+    it 'Compares the result of my_any? enumerable after running through my_text with (/t/) to the original enumerable any?' do
       expect(my_text.my_any?(/t/)).to eql(my_text.any?(/t/))
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output ofmy_any? enumerable after running through my_array without a block given' do
       expect(my_array.my_any?.to_s).to eql(my_array.my_any?.to_s)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_any? enumerable after running through my_range without a block given' do
       expect(my_range.my_any?.to_s).to eql(my_range.my_any?.to_s)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_any? enumerable after running through my_hash without a block given' do
       expect(my_hash.my_any?.to_s).to eql(my_hash.my_any?.to_s)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_any? enumerable after running through my_text without a block given' do
       expect(my_text.my_any?.to_s).to eql(my_text.my_any?.to_s)
     end
   end
