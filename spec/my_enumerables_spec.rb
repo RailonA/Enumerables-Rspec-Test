@@ -40,13 +40,13 @@ describe Enumerable do
       expect(my_hash.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_hash.each_with_index { |value, index| puts "#{value} #{index}" })
     end
     it 'Compares the output of my_each_with_index enumerable after running through my_array without a block or argument is given' do
-      expect(my_array.my_each_with_index.to_a).to eq(my_array.my_each_with_index.to_a)
+      expect(my_array.my_each_with_index.to_a).to eq(my_array.each_with_index.to_a)
     end
     it 'Compares the output of my_each_with_index enumerable after running through my_range without a block or argument is given' do
-      expect(my_range.my_each_with_index.to_a).to eq(my_range.my_each_with_index.to_a)
+      expect(my_range.my_each_with_index.to_a).to eq(my_range.each_with_index.to_a)
     end
     it 'Compares the output of my_each_with_index enumerable after running through my_hash without a block or argument is given' do
-      expect(my_hash.my_each_with_index.to_a).to eq(my_hash.my_each_with_index.to_a)
+      expect(my_hash.my_each_with_index.to_a).to eq(my_hash.each_with_index.to_a)
     end
   end
 

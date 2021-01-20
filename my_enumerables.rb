@@ -22,20 +22,23 @@ module Enumerable
   end
 
   def my_each_with_index(pro = nil)
-    return to_enum unless block_given?
-
     arr = to_a
     i = 0
-    if pro
-      while i < arr.length
-        proc.cal arr[i], i
+
+    unless block_given?
+      new_arr = []
+      arr.my_each do |item|
+        this = [item, i]
+        new_arr.push(this)
         i += 1
       end
-    else
-      while i < arr.length
-        yield arr[i], i
-        i += 1
-      end
+      return new_arr.to_enum
+    end
+
+    while i < arr.length
+      yield arr[i], i unless pro
+      proc.cal arr[i], i if pro
+      i += 1
     end
     self
   end
