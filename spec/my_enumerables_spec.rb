@@ -9,104 +9,106 @@ describe Enumerable do
   let(:arg) { proc { |value| value * 2 } }
   let(:my_range) { (1..9) }
 
+
   describe '#my_each' do
-    it 'Test my_array.my_each to return the same as my_array.each' do
+    it 'Compares the result of my_each enumerable after running through my_array to the original enumerable each' do
       expect(my_array.my_each(&:even?)).to eql(my_array.each(&:even?))
     end
-    it 'Test my_range.my_each to return the same as my_range.each' do
+    it 'Compares the result of my_each enumerable after running through my_range to the original enumerable each' do
       expect(my_range.my_each(&:even?)).to eql(my_range.each(&:even?))
     end
-    it 'Test my_hash.my_each to return the same as my_hash.each' do
+    it 'Compares the result of my_each enumerable after running through my_hash to the original enumerable each' do
       expect(my_hash.my_each { |key, value| puts "#{key} is #{value}" }).to eql(my_hash.each { |key, value| puts "#{key} is #{value}" })
     end
-    it 'Compares the output of each element in the array when no block or argument is given' do
+    it 'Compares the output of my_each enumerable after running through my_array without a block or argument is given' do
       expect(my_array.my_each.to_a).to eq(my_array.each.to_a)
     end
-    it 'Compares the output of each element in the range when no block or argument is given' do
+    it 'Compares the output of  my_each enumerable after running through my_range without a block or argument is given' do
       expect(my_range.my_each.to_a).to eq(my_range.each.to_a)
     end
-    it 'Compares the output of each element in the hash when no block or argument is given' do
+    it 'Compares the output of  my_hash enumerable after running through my_hash without a block or argument is given' do
       expect(my_hash.my_each.to_a).to eq(my_hash.each.to_a)
     end
   end
 
   describe '#my_each_with_index' do
-    it ' Test my_array.my_each_with_index to return the same as my_array.each_with_index' do
-      expect(my_array.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_array.each { |value, index| puts "#{value} #{index}" })
+    it 'Compares the result of my_each_with_index enumerable after running through my_array to the original enumerable each_with_index' do
+      expect(my_array.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_array.each_with_index { |value, index| puts "#{value} #{index}" })
     end
-    it ' Test my_range.my_each_with_index to return the same as my_range.each_with_index' do
-      expect(my_range.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_range.each { |value, index| puts "#{value} #{index}" })
+    it 'Compares the result of my_each_with_index enumerable after running through my_range to the original enumerable each_with_index' do
+      expect(my_range.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_range.each_with_index { |value, index| puts "#{value} #{index}" })
     end
-    it ' Test my_hash.my_each_with_index to return the same as my_hash.each_with_index' do
-      expect(my_hash.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_hash.each { |value, index| puts "#{value} #{index}" })
+    it 'Compares the result of my_each_with_index enumerable after running through my_hash to the original enumerable each_with_index' do
+      expect(my_hash.my_each_with_index { |value, index| puts "#{value} #{index}" }).to eql(my_hash.each_with_index { |value, index| puts "#{value} #{index}" })
     end
-    it 'Compares the output of each element in the array when no block or argument is given' do
+    it 'Compares the output of my_each_with_index enumerable after running through my_array without a block or argument is given' do
       expect(my_array.my_each_with_index.to_a).to eq(my_array.my_each_with_index.to_a)
     end
-    it 'Compares the output of each element in the range when no block or argument is given' do
+    it 'Compares the output of my_each_with_index enumerable after running through my_range without a block or argument is given' do
       expect(my_range.my_each_with_index.to_a).to eq(my_range.my_each_with_index.to_a)
     end
-    it 'Compares the output of each element in the hash when no block or argument is given' do
+    it 'Compares the output of my_each_with_index enumerable after running through my_hash without a block or argument is given' do
       expect(my_hash.my_each_with_index.to_a).to eq(my_hash.my_each_with_index.to_a)
     end
   end
 
   describe '#my_select' do
-    it ' Test my_array.my_each_with_index to return the same as my_array.each_with_index' do
+    it 'Compares the result of my_select enumerable after running through my_array to the original enumerable select' do
       expect(my_array.my_select { |value| value }).to eql(my_array.select { |value| value })
     end
-    it ' Test my_range.my_each_with_index to return the same as my_range.each_with_index' do
+    it 'Compares the result of my_select enumerable after running through my_range to the original enumerable select' do
       expect(my_range.my_select { |value| value }).to eql(my_range.select { |value| value })
     end
-    it ' Test my_hash.my_each_with_index to return the same as my_hash.each_with_index' do
+    it 'Compares the result of my_select enumerable after running through my_hash to the original enumerable select' do
       expect(my_hash.my_select { |key, value| puts "#{key} is #{value}" }).to eql(my_hash.select { |key, value| puts "#{key} is #{value}" })
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_array without a block given' do
       expect(my_array.my_select.to_a).to eql(my_array.select.to_a)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_range without a block given' do
       expect(my_range.my_select.to_a).to eql(my_range.select.to_a)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_hash without a block given' do
       expect(my_hash.my_select.to_a).to eql(my_hash.select.to_a)
     end
   end
 
   describe '#my_all?' do
-    it ' Test my_array.my_all? to return the same as my_array.all?' do
+    it 'Compares the result of my_all? enumerable after running through my_array to the original enumerable all?' do
       expect(my_array.my_all? { |value| value }).to eql(my_array.all? { |value| value })
     end
-    it ' Test my_array.my_all?(Numeric) to return the same as my_array.all?(Numeric)' do
+    it 'Compares the result of my_all? enumerable after running through my_array with (Numeric) to the original enumerable all?' do
       expect(my_array.my_all?(Numeric)).to eql(my_array.all?(Numeric))
     end
-    it ' Test my_range.my_all? { |value| value } to return the same as my_range.all? { |value| value }' do
+    it 'Compares the result of my_all? enumerable after running through my_range to the original enumerable all?' do
       expect(my_range.my_all? { |value| value }).to eql(my_range.all? { |value| value })
     end
-    it ' Test my_range.my_all?(Numeric to return the same as my_range.all?(Numeric)' do
+    it 'Compares the result of my_all? enumerable after running through my_range with (Numeric) to the  to the original enumerable all?' do
       expect(my_range.my_all?(Numeric)).to eql(my_range.all?(Numeric))
     end
-    it ' Test my_hash.my_all? { |_key, value| value } to return the same as my_hash.all? { |_key, value| value }' do
+    it 'Compares the result of my_all? enumerable after running through my_hash to the original enumerable all?' do
       expect(my_hash.my_all? { |_key, value| value }).to eql(my_hash.all? { |_key, value| value })
     end
-    it ' Test my_text.my_all? { |word| word.length >= 3 } to return the same as my_text.all? { |word| word.length >= 3 }' do
+    it 'Compares the result of my_all? enumerable after running through my_text to the original enumerable all?' do
       expect(my_text.my_all? { |word| word.length >= 3 }).to eql(my_text.all? { |word| word.length >= 3 })
     end
-    it ' Test my_text.my_all?(/t/) to return the same as my_text.all?(/t/)' do
+    it 'Compares the result of my_all? enumerable after running through my_text with (/t/) to the original enumerable all?' do
       expect(my_text.my_all?(/t/)).to eql(my_text.all?(/t/))
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_array without a block given' do
       expect(my_array.my_all?.to_s).to eql(my_array.all?.to_s)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_range without a block given' do
       expect(my_range.my_all?.to_s).to eql(my_range.all?.to_s)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_hash without a block given' do
       expect(my_hash.my_all?.to_s).to eql(my_hash.all?.to_s)
     end
-    it 'Compares array output without a block ' do
+    it 'Compares the output of my_select enumerable after running through my_text without a block given' do
       expect(my_text.my_all?.to_s).to eql(my_text.all?.to_s)
     end
   end
+
 
   describe '#my_any?' do
     it ' Test my_array.my_any? { |value| value } to return the same as my_array.any? { |value| value }' do
