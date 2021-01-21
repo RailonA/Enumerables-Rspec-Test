@@ -22,33 +22,43 @@ module Enumerable
   end
 
   def my_each_with_index(pro = nil)
-    return to_enum unless block_given?
-
     arr = to_a
     i = 0
-    if pro
-      while i < arr.length
-        proc.cal arr[i], i
+
+    unless block_given?
+      new_arr = []
+      arr.my_each do |item|
+        this = [item, i]
+        new_arr.push(this)
         i += 1
       end
-    else
-      while i < arr.length
-        yield arr[i], i
-        i += 1
-      end
+      return new_arr.to_enum
+    end
+
+    while i < arr.length
+      yield arr[i], i unless pro
+      proc.cal arr[i], i if pro
+      i += 1
     end
     self
   end
 
   def my_select
-    return to_enum unless block_given?
+    return to_enum :my_select unless block_given?
 
-    arr = to_a
-    arr2 = []
-    arr.my_each_with_index do |_item, index|
-      arr2.push(arr[index]) if yield arr[index]
+    return_arr = []
+    return_hash = {}
+    if is_a?(Hash)
+      my_each do |key, val|
+        return_hash[key] = val if yield(key, val)
+      end
+      return_hash
+    else
+      my_each do |val|
+        return_arr.push(val) if yield(val)
+      end
+      return_arr
     end
-    arr2
   end
 
   def my_all?(args = nil)
@@ -148,7 +158,7 @@ module Enumerable
 
   def my_inject(arg = nil, sym = nil)
     arr = to_a
-    raise LocalJumpError if arg.nil? and !block_given?
+    raise LocalJumpError if arg.nil? && !block_given?
 
     i = block_given? ? 1 : 0
     result = arg
@@ -170,6 +180,7 @@ module Enumerable
     result
   end
 end
+
 def multiply_els(arr = [])
   arr.my_inject { |total, item| total * item }
 end
